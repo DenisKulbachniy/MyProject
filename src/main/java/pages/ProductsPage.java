@@ -24,6 +24,9 @@ public class ProductsPage extends BasePage {
     @FindBy(xpath = "(//span[@class='goods-tile__title'])[2]")
     private WebElement secondProduct;
 
+    @FindBy(xpath = "//span[@class='goods-tile__title']")
+    private WebElement allProductsNotFirstOnly;
+
     @FindBy(xpath = "//a[contains(text(),'Приставки PlayStation')]")
     private WebElement playStationCategory;
 
@@ -72,9 +75,13 @@ public class ProductsPage extends BasePage {
         wait = new Waiter(driver);
         PageFactory.initElements(driver, this);
     }
-    public String getProductNameInWishList(){
+    public String getProductNameInWishList() {
         wait.untilVisible(productNameInWishList);
         return productNameInWishList.getText();
+    }
+        public String getAllProductsName(){
+        wait.untilVisible(allProductsNotFirstOnly);
+        return allProductsNotFirstOnly.getText();
     }
     public String getKitInCartText(){
         wait.untilVisible(kitInCart);

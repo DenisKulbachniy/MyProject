@@ -5,8 +5,6 @@ import org.junit.BeforeClass;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import pages.LoginPage;
 
 public class BaseTest {
     protected static WebDriver driver;
@@ -30,6 +28,6 @@ public class BaseTest {
 
     @AfterClass
     public static void close() {
-        driver.quit();
+        //driver.quit();
     }
 }

@@ -1,9 +1,7 @@
 package pages;
 
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import waiters.Waiter;
@@ -57,11 +55,11 @@ public class LoginPage extends BasePage {
     public void inputPasswordField() {
         passwordField.sendKeys("01061996Artem");
     }
-        public String getNameOfWishList() {
-            wait.untilVisible(nameOfCreatedWishList);
-            return nameOfCreatedWishList.getText();
-        }
 
+    public String getNameOfWishList() {
+        wait.untilVisible(nameOfCreatedWishList);
+        return nameOfCreatedWishList.getText();
+    }
 
     public void enterButtonClick() {
         wait.untilVisible(enterButton).click();
@@ -70,13 +68,16 @@ public class LoginPage extends BasePage {
     public void accountWishListClick() {
         wait.untilVisible(accountWishList).click();
     }
+
     public void createNewWishListClick() {
         wait.untilVisible(createNewWishList).click();
     }
-    public void nameOfNewWishList(){
+
+    public void nameOfNewWishList() {
         myListOfWishes.sendKeys("Ноутбуки");
     }
-    public void addNewListOfWishesClick(){
+
+    public void addNewListOfWishesClick() {
         wait.untilVisible(addNewListOfWishes).click();
     }
 

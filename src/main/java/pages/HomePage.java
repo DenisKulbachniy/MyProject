@@ -42,7 +42,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//button[@class='button button_size_medium button_color_green']")
     private WebElement acceptButtonToChooseCity;
 
-    @FindBy(xpath = "//*[@class='search-form__input ng-pristine ng-valid ng-touched']")
+    @FindBy(xpath = "//input[contains(@class, 'search-form')]")
     private WebElement searchField;
 
     @FindBy(xpath = "//button[@class='button button_color_green button_size_medium search-form__submit']")
@@ -98,13 +98,13 @@ public class HomePage extends BasePage {
     public void acceptButtonToChooseCityClick() {
         wait.untilVisible(acceptButtonToChooseCity).click();
     }
-    public void inputSearchField(){
-//        Actions actions = new Actions(driver);
-//        wait.untilVisible(searchField).click();
-//        actions.sendKeys(searchField,"Ноутбук",Keys.ENTER);
+
+    public void inputSearchField() {
+        wait.untilVisible(searchField).click();
         wait.untilVisible(searchField).sendKeys("Ноутбук");
     }
-    public void searchButtonClick(){
+
+    public void searchButtonClick() {
         wait.untilVisible(searchButton).click();
     }
 
