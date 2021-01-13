@@ -70,6 +70,9 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.activeHeaderWishListButtonClick();
 
         Assert.assertTrue(productsPage.getProductNameInWishList().contains(LAPTOP));
+
+        productsPage.addMenuInWishListClick();
+        productsPage.deleteWishListClick();
     }
 
     @Test
@@ -95,6 +98,9 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.activeHeaderWishListButtonClick();
 
         Assert.assertTrue(productsPage.getProductNameInWishList().contains(LAPTOP));
+
+        productsPage.addMenuInWishListClick();
+        productsPage.deleteWishListClick();
     }
 
     @Test

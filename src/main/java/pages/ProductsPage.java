@@ -68,6 +68,12 @@ public class ProductsPage extends BasePage {
     @FindBy(xpath = "//div[@class='cart-kits']")
     private WebElement kitInCart;
 
+    @FindBy(xpath = "//button[@class='button button_color_white button_size_medium dropdown-css__toggle']")
+    private WebElement addMenuInWishList;
+
+    @FindBy(xpath = "//button[@class='button button_color_white button_size_medium dropdown-css__control js-delete-wishlist']")
+    private WebElement deleteWishList;
+
     public ProductsPage(WebDriver driver) {
         super(driver);
         wait = new Waiter(driver);
@@ -150,5 +156,10 @@ public class ProductsPage extends BasePage {
     public void buyKitClick() {
         wait.untilVisible(buyKit).click();
     }
-
+    public void addMenuInWishListClick(){
+        wait.untilVisible(addMenuInWishList).click();
+    }
+    public void deleteWishListClick(){
+        wait.untilVisible(deleteWishList).click();
+    }
 }
