@@ -9,10 +9,12 @@ import waiters.Waiter;
 public class LoginPage extends BasePage {
 
     private final Waiter wait;
-    private WebDriver driver;
 
     @FindBy(xpath = "//button[@class='header-topline__user-link button--link']")
     private WebElement enterToAccountLink;
+
+    @FindBy(xpath = "//a[@class='header-topline__user-link']")
+    private WebElement enterToEnteredAccount;
 
     @FindBy(xpath = "//*[@id='auth_email']")
     private WebElement loginField;
@@ -32,11 +34,14 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "(//div[contains(text(), '')]/following::input[2])[1]")
     private WebElement myListOfWishes;
 
-    @FindBy(xpath = "//*[@class='button button_size_medium button_color_navy']")
+    @FindBy(xpath = "//button[@class='button button_size_medium button_color_navy']")
     private WebElement addNewListOfWishes;
 
-    @FindBy(xpath = "//*[@class='wish-details__heading']")
+    @FindBy(xpath = "//h3[@class='wish-details__heading']")
     private WebElement nameOfCreatedWishList;
+
+    @FindBy(xpath = "(//p[@class='personal-data__value'])[7]")
+    private WebElement personnelData;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -48,17 +53,22 @@ public class LoginPage extends BasePage {
         wait.untilVisible(enterToAccountLink).click();
     }
 
-    public void inputLoginField() {
-        wait.untilVisible(loginField).sendKeys("Petrovartem01061996@gmail.com");
+    public void inputLoginField(String key) {
+        wait.untilVisible(loginField).sendKeys(key);
     }
 
-    public void inputPasswordField() {
-        passwordField.sendKeys("01061996Artem");
+    public void inputPasswordField(String key) {
+        wait.untilVisible(passwordField).sendKeys(key);
     }
 
     public String getNameOfWishList() {
         wait.untilVisible(nameOfCreatedWishList);
         return nameOfCreatedWishList.getText();
+    }
+
+    public String getAccountName() {
+        wait.untilVisible(personnelData);
+        return personnelData.getText();
     }
 
     public void enterButtonClick() {
@@ -81,4 +91,7 @@ public class LoginPage extends BasePage {
         wait.untilVisible(addNewListOfWishes).click();
     }
 
+    public void enterToEnteredAccClick() {
+        wait.untilVisible(enterToEnteredAccount).click();
+    }
 }

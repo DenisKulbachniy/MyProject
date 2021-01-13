@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import waiters.Waiter;
 
+import java.util.List;
+
 public class ProductsPage extends BasePage {
     private final Waiter wait;
 
@@ -25,7 +27,7 @@ public class ProductsPage extends BasePage {
     private WebElement secondProduct;
 
     @FindBy(xpath = "//span[@class='goods-tile__title']")
-    private WebElement allProductsNotFirstOnly;
+    private List<WebElement> allProductsNotFirstOnly;
 
     @FindBy(xpath = "//a[contains(text(),'Приставки PlayStation')]")
     private WebElement playStationCategory;
@@ -36,13 +38,13 @@ public class ProductsPage extends BasePage {
     @FindBy(xpath = "//button[@class='button button--small button--navy']")
     private WebElement notifyAboutAppearingOfProductButton1;
 
-    @FindBy(xpath = "//*[@class='product__title']")
+    @FindBy(xpath = "//h1[@class='product__title']")
     private WebElement productTitle;
 
-    @FindBy(xpath = "(//*[@class='wish-button js-wish-button'])[1]")
+    @FindBy(xpath = "(//button[@class='wish-button js-wish-button'])[1]")
     private WebElement firstWishButton;
 
-    @FindBy(xpath = "//*[@class='goods-tile__title']")
+    @FindBy(xpath = "//span[@class='goods-tile__title']")
     private WebElement productNameInWishList;
 
     @FindBy(xpath = "(//button[@class='compare-button'])[1]")
@@ -57,7 +59,7 @@ public class ProductsPage extends BasePage {
     @FindBy(xpath = "//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']")
     private WebElement deleteInCartButton;
 
-    @FindBy(xpath = "//*[@class='cart-dummy__heading']")
+    @FindBy(xpath = "//h4[@class='cart-dummy__heading']")
     private WebElement emptyCart;
 
     @FindBy(xpath = "//button[@class='buy-button button button--large button--with-icon button--green buy-kit']")
@@ -66,31 +68,24 @@ public class ProductsPage extends BasePage {
     @FindBy(xpath = "//div[@class='cart-kits']")
     private WebElement kitInCart;
 
-    public WebElement getCartButtonOnFirstProduct() {
-        return cartButtonOnFirstProduct;
-    }
-
     public ProductsPage(WebDriver driver) {
         super(driver);
         wait = new Waiter(driver);
         PageFactory.initElements(driver, this);
     }
+
     public String getProductNameInWishList() {
         wait.untilVisible(productNameInWishList);
         return productNameInWishList.getText();
     }
-        public String getAllProductsName(){
-        wait.untilVisible(allProductsNotFirstOnly);
-        return allProductsNotFirstOnly.getText();
-    }
-    public String getKitInCartText(){
-        wait.untilVisible(kitInCart);
-        return kitInCart.getText();
+
+    public List<WebElement> getAllProductsName() {
+        return allProductsNotFirstOnly;
     }
 
-    public String getFirstProductNameOnWishListButton(){
-        wait.untilVisible(firstWishButton);
-        return firstWishButton.getText();
+    public String getKitInCartText() {
+        wait.untilVisible(kitInCart);
+        return kitInCart.getText();
     }
 
     public String getProductNameInCart() {
@@ -98,10 +93,6 @@ public class ProductsPage extends BasePage {
         return productInCart.getText();
     }
 
-    public String getProductTitleText() {
-        wait.untilVisible(productTitle);
-        return productTitle.getText();
-    }
     public String getEmptyCartText() {
         wait.untilVisible(emptyCart);
         return emptyCart.getText();
@@ -111,19 +102,13 @@ public class ProductsPage extends BasePage {
         wait.untilVisible(firstProduct);
         return firstProduct.getText();
     }
-    public String getSecondProductName() {
-        wait.untilVisible(secondProduct);
-        return secondProduct.getText();
-    }
+
     public void putFirstProductInCart() {
         wait.untilVisible(cartButtonOnFirstProduct).click();
     }
+
     public void clickToHeaderCartButton() {
         wait.untilVisible(headerCartButton).click();
-    }
-
-    public void playStationCategoryClick() {
-        wait.untilVisible(playStationCategory).click();
     }
 
     public void playStationChoiceClick() {
@@ -133,28 +118,36 @@ public class ProductsPage extends BasePage {
     public void notifyAboutAppearingOfProductButtonClick() {
         wait.untilVisible(notifyAboutAppearingOfProductButton1).click();
     }
-    public void firstWishButtonClick(){
+
+    public void firstWishButtonClick() {
         wait.untilVisible(firstWishButton).click();
     }
-    public void clickToFirstProduct(){
+
+    public void clickToFirstProduct() {
         wait.untilVisible(firstProduct).click();
     }
-    public void clickToProductTitle(){
+
+    public void clickToProductTitle() {
         wait.untilVisible(productTitle).click();
     }
-    public void clickToCompareFirstProduct(){
+
+    public void clickToCompareFirstProduct() {
         wait.untilVisible(firstComparisonProduct).click();
     }
-    public void clickToCompareSecondProduct(){
+
+    public void clickToCompareSecondProduct() {
         wait.untilVisible(secondComparisonProduct).click();
     }
-    public void clickToDeleteInCartButton(){
+
+    public void clickToDeleteInCartButton() {
         wait.untilVisible(deleteInCartButton).click();
     }
-    public void addMenuForDeleteProductFromCartClick(){
+
+    public void addMenuForDeleteProductFromCartClick() {
         wait.untilVisible(addMenuForDeleteProductFromCart).click();
     }
-    public void buyKitClick(){
+
+    public void buyKitClick() {
         wait.untilVisible(buyKit).click();
     }
 

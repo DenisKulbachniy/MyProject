@@ -9,10 +9,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class BaseTest {
     protected static WebDriver driver;
 
-    JavascriptExecutor jse = (JavascriptExecutor) driver;{
+    JavascriptExecutor jse = (JavascriptExecutor) driver;
+
+    {
         jse.executeScript("scroll(0, 250);");
     }
-    JavascriptExecutor jseHomePage = (JavascriptExecutor) driver;{
+
+    JavascriptExecutor jseHomePage = (JavascriptExecutor) driver;
+
+    {
         jseHomePage.executeScript("scroll(0, 250);");
     }
 
@@ -28,6 +33,6 @@ public class BaseTest {
 
     @AfterClass
     public static void close() {
-        //driver.quit();
+        driver.quit();
     }
 }

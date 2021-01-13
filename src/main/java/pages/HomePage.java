@@ -1,16 +1,13 @@
 package pages;
 
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import waiters.Waiter;
 
 public class HomePage extends BasePage {
     private final Waiter wait;
-    private WebDriver driver;
 
     @FindBy(xpath = "//button[@class='menu-toggler']")
     private WebElement productsCatalogue;
@@ -36,7 +33,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@class='button--link header-cities__label']")
     private WebElement chooseCity;
 
-    @FindBy(xpath = "//*[@class='header-location__popular-link']")
+    @FindBy(xpath = "//a[@class='header-location__popular-link']")
     private WebElement listOfCities;
 
     @FindBy(xpath = "//button[@class='button button_size_medium button_color_green']")
@@ -67,7 +64,7 @@ public class HomePage extends BasePage {
         wait.untilVisible(laptopCategory).click();
     }
 
-    public void ProductForGamersCategoryClick() {
+    public void productForGamersCategoryClick() {
         wait.untilVisible(productForGamersCategory).click();
     }
 
@@ -75,11 +72,11 @@ public class HomePage extends BasePage {
         wait.untilVisible(playstationStoreCategory).click();
     }
 
-    public void ActiveHeaderWishListButtonClick() {
+    public void activeHeaderWishListButtonClick() {
         wait.untilVisible(activeHeaderWishListButton).click();
     }
 
-    public void ActiveHeaderComparisonButtonClick() {
+    public void activeHeaderComparisonButtonClick() {
         wait.untilVisible(activeHeaderComparisonButton).click();
     }
 
@@ -107,7 +104,5 @@ public class HomePage extends BasePage {
     public void searchButtonClick() {
         wait.untilVisible(searchButton).click();
     }
-
-
 }
 

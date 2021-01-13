@@ -1,45 +1,49 @@
 package tests;
 
 import org.junit.Test;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.ProductsPage;
 
 public class ActionsWithProductsTest extends BaseTest {
+    private static final String INPUT_FOR_LOGIN = "Petrovartem01061996@gmail.com";
+    private static final String INPUT_FOR_PASSWORD = "01061996Artem";
+    private static final String LAPTOP = "Ноутбук";
+    private static final String LAPTOPS = "Ноутбуки";
+    private static final String TOGETHER_CHEAP = "Вместе дешевле";
+    private static final String CART_IS_EMPTY = "Корзина пуста";
+    private static final String PLAYSTATION = "PlayStation";
+    HomePage homePage = new HomePage(driver);
+    ProductsPage productsPage = new ProductsPage(driver);
+    LoginPage loginPage = new LoginPage(driver);
 
     @Test
     public void productActionCartTest() {
-        HomePage homePage = new HomePage(getDriver());
-        ProductsPage productsPage = new ProductsPage(getDriver());
-
         homePage.openHomePage();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
         productsPage.putFirstProductInCart();
         productsPage.clickToHeaderCartButton();
+
         Assert.assertEquals(productsPage.getFirstProductName(), productsPage.getProductNameInCart());
     }
 
     @Test
     public void productKitActionCartTest() {
-        HomePage homePage = new HomePage(getDriver());
-        ProductsPage productsPage = new ProductsPage(getDriver());
-
         homePage.openHomePage();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
         productsPage.clickToFirstProduct();
         jse.executeScript("scroll(0, 2500);");
         productsPage.buyKitClick();
-        Assert.assertTrue(productsPage.getKitInCartText().contains("Вместе дешевле"));
+
+        Assert.assertTrue(productsPage.getKitInCartText().contains(TOGETHER_CHEAP));
     }
 
     @Test
     public void productActionDeleteFromCartTest() {
-        HomePage homePage = new HomePage(getDriver());
-        ProductsPage productsPage = new ProductsPage(getDriver());
-
         homePage.openHomePage();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
@@ -47,93 +51,82 @@ public class ActionsWithProductsTest extends BaseTest {
         productsPage.clickToHeaderCartButton();
         productsPage.addMenuForDeleteProductFromCartClick();
         productsPage.clickToDeleteInCartButton();
-        Assert.assertTrue(productsPage.getEmptyCartText().contains("Корзина пуста"));
+
+        Assert.assertTrue(productsPage.getEmptyCartText().contains(CART_IS_EMPTY));
     }
 
     @Test
     public void productActionWishListTest() {
-        HomePage homePage = new HomePage(getDriver());
-        LoginPage loginPage = new LoginPage(getDriver());
-        ProductsPage productsPage = new ProductsPage(getDriver());
-
         homePage.openHomePage();
         loginPage.enterToAccountClick();
-        loginPage.inputLoginField();
-        loginPage.inputPasswordField();
+        loginPage.inputLoginField(INPUT_FOR_LOGIN);
+        loginPage.inputPasswordField(INPUT_FOR_PASSWORD);
         loginPage.enterButtonClick();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
         productsPage.clickToFirstProduct();
         productsPage.clickToProductTitle();
         productsPage.firstWishButtonClick();
-        homePage.ActiveHeaderWishListButtonClick();
-        Assert.assertTrue(productsPage.getProductNameInWishList().contains("Ноутбук"));
+        homePage.activeHeaderWishListButtonClick();
+
+        Assert.assertTrue(productsPage.getProductNameInWishList().contains(LAPTOP));
     }
 
     @Test
     public void wishListNewOwnListCreationTest() {
-        HomePage homePage = new HomePage(getDriver());
-        LoginPage loginPage = new LoginPage(getDriver());
-        ProductsPage productsPage = new ProductsPage(getDriver());
-
         homePage.openHomePage();
         loginPage.enterToAccountClick();
-        loginPage.inputLoginField();
-        loginPage.inputPasswordField();
+        loginPage.inputLoginField(INPUT_FOR_LOGIN);
+        loginPage.inputPasswordField(INPUT_FOR_PASSWORD);
         loginPage.enterButtonClick();
         jseHomePage.executeScript("scroll(0, 250);");
         loginPage.accountWishListClick();
         loginPage.createNewWishListClick();
         loginPage.nameOfNewWishList();
         loginPage.addNewListOfWishesClick();
-        Assert.assertTrue(loginPage.getNameOfWishList().contains("Ноутбуки"));
+
+        Assert.assertTrue(loginPage.getNameOfWishList().contains(LAPTOPS));
+
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
         productsPage.clickToFirstProduct();
         productsPage.clickToProductTitle();
         productsPage.firstWishButtonClick();
-        homePage.ActiveHeaderWishListButtonClick();
-        Assert.assertTrue(productsPage.getProductNameInWishList().contains("Ноутбук"));
+        homePage.activeHeaderWishListButtonClick();
 
-
+        Assert.assertTrue(productsPage.getProductNameInWishList().contains(LAPTOP));
     }
 
     @Test
     public void outOfStackProductTest() {
-        HomePage homePage = new HomePage(getDriver());
-        ProductsPage productsPage = new ProductsPage(getDriver());
-        LoginPage loginPage = new LoginPage(getDriver());
-
         homePage.openHomePage();
         loginPage.enterToAccountClick();
-        loginPage.inputLoginField();
-        loginPage.inputPasswordField();
+        loginPage.inputLoginField(INPUT_FOR_LOGIN);
+        loginPage.inputPasswordField(INPUT_FOR_PASSWORD);
         loginPage.enterButtonClick();
         homePage.navigateToCategoriesFromMainPage();
-        homePage.ProductForGamersCategoryClick();
+        homePage.productForGamersCategoryClick();
         homePage.playstationCategoryClick();
         productsPage.playStationChoiceClick();
         productsPage.clickToProductTitle();
         productsPage.notifyAboutAppearingOfProductButtonClick();
-        homePage.ActiveHeaderWishListButtonClick();
-        Assert.assertTrue(productsPage.getProductNameInWishList().contains("PlayStation"));
+        homePage.activeHeaderWishListButtonClick();
+
+        Assert.assertTrue(productsPage.getProductNameInWishList().contains(PLAYSTATION));
     }
 
     @Test
     public void comparisonOfProductsTest() {
-        HomePage homePage = new HomePage(getDriver());
-        ProductsPage productsPage = new ProductsPage(getDriver());
-
         homePage.openHomePage();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
         productsPage.clickToCompareFirstProduct();
         productsPage.clickToCompareSecondProduct();
-        homePage.ActiveHeaderComparisonButtonClick();
+        homePage.activeHeaderComparisonButtonClick();
         homePage.comparisonListClick();
-        Assert.assertTrue(productsPage.getFirstProductName().contains("Ноутбук"));
-        Assert.assertTrue(productsPage.getSecondProductName().contains("Ноутбук"));
 
-
+        for (WebElement element : productsPage.getAllProductsName()) {
+            Assert.assertTrue(element.getText().contains(LAPTOP));
+        }
     }
 }

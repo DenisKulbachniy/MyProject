@@ -8,10 +8,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Waiter {
     private final WebDriverWait webDriverWait;
 
-    public Waiter(WebDriver driver){
+    public Waiter(WebDriver driver) {
         webDriverWait = new WebDriverWait(driver, 10);
     }
-    public WebElement untilVisible(WebElement element){
+
+    public WebElement untilVisible(WebElement element) {
         return webDriverWait.until(ExpectedConditions.visibilityOf(element));
     }
 }
