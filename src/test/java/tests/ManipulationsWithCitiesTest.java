@@ -6,7 +6,7 @@ import pages.HomePage;
 
 public class ManipulationsWithCitiesTest extends BaseTest {
     private static final String KIEV = "Киев";
-    HomePage homePage = new HomePage(getDriver());
+    HomePage homePage = new HomePage(driver);
 
     @Test
     public void tryToChangeCityTest() {

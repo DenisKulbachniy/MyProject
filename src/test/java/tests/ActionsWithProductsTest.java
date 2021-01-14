@@ -15,6 +15,7 @@ public class ActionsWithProductsTest extends BaseTest {
     private static final String TOGETHER_CHEAP = "Вместе дешевле";
     private static final String CART_IS_EMPTY = "Корзина пуста";
     private static final String PLAYSTATION = "PlayStation";
+    private static final String NULL = null;
     HomePage homePage = new HomePage(driver);
     ProductsPage productsPage = new ProductsPage(driver);
     LoginPage loginPage = new LoginPage(driver);
@@ -25,9 +26,14 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
         productsPage.putFirstProductInCart();
+
+        Assert.assertFalse(productsPage.putFirstProductInCartIsSelected());
+
         productsPage.clickToHeaderCartButton();
 
         Assert.assertEquals(productsPage.getFirstProductName(), productsPage.getProductNameInCart());
+        Assert.assertTrue(productsPage.getProductNameInCartIsEnabled());
+        Assert.assertTrue(productsPage.getProductNameInCartIsDisplayed());
     }
 
     @Test
@@ -40,6 +46,7 @@ public class ActionsWithProductsTest extends BaseTest {
         productsPage.buyKitClick();
 
         Assert.assertTrue(productsPage.getKitInCartText().contains(TOGETHER_CHEAP));
+        Assert.assertEquals(productsPage.getKitInCartAttribute(), NULL);
     }
 
     @Test
@@ -63,6 +70,8 @@ public class ActionsWithProductsTest extends BaseTest {
         loginPage.inputPasswordField(INPUT_FOR_PASSWORD);
         loginPage.enterButtonClick();
         homePage.navigateToCategoriesFromMainPage();
+        System.out.println(homePage.navigateToLaptopCategory11111());
+        Assert.assertTrue(homePage.navigateToLaptopCategory11111());
         homePage.navigateToLaptopCategory();
         productsPage.clickToFirstProduct();
         productsPage.clickToProductTitle();
@@ -119,6 +128,9 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.activeHeaderWishListButtonClick();
 
         Assert.assertTrue(productsPage.getProductNameInWishList().contains(PLAYSTATION));
+
+        productsPage.addMenuInWishListClick();
+        productsPage.deleteWishListClick();
     }
 
     @Test

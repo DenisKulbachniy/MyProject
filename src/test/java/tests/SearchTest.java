@@ -8,8 +8,8 @@ import pages.ProductsPage;
 
 public class SearchTest extends BaseTest {
     private static final String LAPTOP = "Ноутбук";
-    HomePage homePage = new HomePage(getDriver());
-    ProductsPage productsPage = new ProductsPage(getDriver());
+    HomePage homePage = new HomePage(driver);
+    ProductsPage productsPage = new ProductsPage(driver);
 
     @Test
     public void searchTest() {
@@ -19,5 +19,16 @@ public class SearchTest extends BaseTest {
 
         for (WebElement element : productsPage.getAllProductsName())
             Assert.assertTrue(element.getText().contains(LAPTOP));
+    }
+
+    @Test
+    public void searchTestWithClear() {
+        homePage.openHomePage();
+        homePage.inputSearchField();
+        homePage.searchButtonClick();
+        homePage.clear();
+
+        homePage.searchFieldGetText();
+        Assert.assertTrue(true);
     }
 }

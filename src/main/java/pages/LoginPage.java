@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import waiters.Waiter;
 
@@ -10,18 +11,22 @@ public class LoginPage extends BasePage {
 
     private final Waiter wait;
 
+    @FindBy(id = "auth_email")
+    private WebElement loginField;
+
+    @FindBy(xpath = "//*[@id='auth_pass']")
+    private WebElement passwordField;
+
     @FindBy(xpath = "//button[@class='header-topline__user-link button--link']")
     private WebElement enterToAccountLink;
 
     @FindBy(xpath = "//a[@class='header-topline__user-link']")
     private WebElement enterToEnteredAccount;
 
-    @FindBy(xpath = "//*[@id='auth_email']")
-    private WebElement loginField;
-
-    @FindBy(xpath = "//*[@id='auth_pass']")
-    private WebElement passwordField;
-
+    @FindBys({
+            @FindBy(id = "auth_email"),
+            @FindBy(xpath = "//*[@id='auth_pass']")
+    })
     @FindBy(xpath = "//button[contains(text(),'Войти')]")
     private WebElement enterButton;
 
@@ -75,6 +80,11 @@ public class LoginPage extends BasePage {
         wait.untilVisible(enterButton).click();
     }
 
+    public boolean enterButtonSize() {
+        wait.untilVisible(enterButton).getSize();
+        return true;
+    }
+
     public void accountWishListClick() {
         wait.untilVisible(accountWishList).click();
     }
@@ -95,3 +105,5 @@ public class LoginPage extends BasePage {
         wait.untilVisible(enterToEnteredAccount).click();
     }
 }
+
+

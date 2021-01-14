@@ -9,13 +9,13 @@ import waiters.Waiter;
 public class HomePage extends BasePage {
     private final Waiter wait;
 
-    @FindBy(xpath = "//button[@class='menu-toggler']")
-    private WebElement productsCatalogue;
+    @FindBy(className = "menu-toggler")
+    public WebElement productsCatalogue;
 
-    @FindBy(xpath = "(//a[@class='menu__hidden-title'])[1]")
+    @FindBy(css = "body > app-root > div > div:nth-child(2) > app-rz-header > header > div > div.header-bottomline > div.menu-outer.js-rz-fat-menu > fat-menu > div > ul > li.menu-categories__item.menu-categories__item_state_hovered > div > div.menu__main-cats > div.menu__main-cats-inner > div:nth-child(1) > ul:nth-child(1) > li > a")
     private WebElement laptopCategory;
 
-    @FindBy(xpath = "(//a[contains(text(),'Товары для геймеров')])[1]")
+    @FindBy(linkText = "Товары для геймеров")
     private WebElement productForGamersCategory;
 
     @FindBy(xpath = "(//span[@class='popular-category__title'])[1]")
@@ -39,11 +39,11 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//button[@class='button button_size_medium button_color_green']")
     private WebElement acceptButtonToChooseCity;
 
-    @FindBy(xpath = "//input[contains(@class, 'search-form')]")
+    @FindBy(name = "search")
     private WebElement searchField;
 
     @FindBy(xpath = "//button[@class='button button_color_green button_size_medium search-form__submit']")
-    private WebElement searchButton;
+    public WebElement searchButton;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -56,12 +56,21 @@ public class HomePage extends BasePage {
         return chooseCity.getText();
     }
 
+    public String searchFieldGetText() {
+        wait.untilVisible(searchField);
+        return chooseCity.getText();
+    }
+
     public void navigateToCategoriesFromMainPage() {
         wait.untilVisible(productsCatalogue).click();
     }
 
     public void navigateToLaptopCategory() {
         wait.untilVisible(laptopCategory).click();
+    }
+    public boolean navigateToLaptopCategory11111() {
+        wait.untilVisible(laptopCategory).getCssValue("menu-categories");
+        return true;
     }
 
     public void productForGamersCategoryClick() {
@@ -101,8 +110,12 @@ public class HomePage extends BasePage {
         wait.untilVisible(searchField).sendKeys("Ноутбук");
     }
 
+    public void clear() {
+        searchField.clear();
+    }
+
     public void searchButtonClick() {
-        wait.untilVisible(searchButton).click();
+        wait.untilVisible(searchButton).submit();
     }
 }
 

@@ -21,10 +21,6 @@ public class BaseTest {
         jseHomePage.executeScript("scroll(0, 250);");
     }
 
-    public static WebDriver getDriver() {
-        return driver;
-    }
-
     @BeforeClass
     public static void setUp() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");

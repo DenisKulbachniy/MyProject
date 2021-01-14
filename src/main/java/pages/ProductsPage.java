@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import waiters.Waiter;
@@ -9,6 +10,7 @@ import waiters.Waiter;
 import java.util.List;
 
 public class ProductsPage extends BasePage {
+
     private final Waiter wait;
 
     @FindBy(xpath = "(//button[@class='buy-button goods-tile__buy-button'])[1]")
@@ -32,7 +34,7 @@ public class ProductsPage extends BasePage {
     @FindBy(xpath = "//a[contains(text(),'Приставки PlayStation')]")
     private WebElement playStationCategory;
 
-    @FindBy(xpath = "//span[contains(text(),'PlayStation 5')]")
+    @FindBy(xpath = "//span[contains(text(),'Игровая приставка PlayStation 5 Digital Edition')]")
     private WebElement playStationChoice;
 
     @FindBy(xpath = "//button[@class='button button--small button--navy']")
@@ -46,6 +48,11 @@ public class ProductsPage extends BasePage {
 
     @FindBy(xpath = "//span[@class='goods-tile__title']")
     private WebElement productNameInWishList;
+
+    @FindAll({
+            @FindBy(xpath = "(//button[@class='compare-button'])[1]"),
+            @FindBy(xpath = "(//button[@class='compare-button'])[2]")
+    })
 
     @FindBy(xpath = "(//button[@class='compare-button'])[1]")
     private WebElement firstComparisonProduct;
@@ -94,9 +101,24 @@ public class ProductsPage extends BasePage {
         return kitInCart.getText();
     }
 
+    public String getKitInCartAttribute() {
+        wait.untilVisible(kitInCart);
+        return kitInCart.getAttribute("");
+    }
+
     public String getProductNameInCart() {
         wait.untilVisible(productInCart);
         return productInCart.getText();
+    }
+
+    public Boolean getProductNameInCartIsEnabled() {
+        wait.untilVisible(productInCart);
+        return productInCart.isEnabled();
+    }
+
+    public Boolean getProductNameInCartIsDisplayed() {
+        wait.untilVisible(productInCart);
+        return productInCart.isDisplayed();
     }
 
     public String getEmptyCartText() {
@@ -111,6 +133,10 @@ public class ProductsPage extends BasePage {
 
     public void putFirstProductInCart() {
         wait.untilVisible(cartButtonOnFirstProduct).click();
+    }
+
+    public Boolean putFirstProductInCartIsSelected() {
+        return wait.untilVisible(cartButtonOnFirstProduct).isSelected();
     }
 
     public void clickToHeaderCartButton() {
@@ -139,6 +165,7 @@ public class ProductsPage extends BasePage {
 
     public void clickToCompareFirstProduct() {
         wait.untilVisible(firstComparisonProduct).click();
+
     }
 
     public void clickToCompareSecondProduct() {
@@ -156,10 +183,12 @@ public class ProductsPage extends BasePage {
     public void buyKitClick() {
         wait.untilVisible(buyKit).click();
     }
-    public void addMenuInWishListClick(){
+
+    public void addMenuInWishListClick() {
         wait.untilVisible(addMenuInWishList).click();
     }
-    public void deleteWishListClick(){
+
+    public void deleteWishListClick() {
         wait.untilVisible(deleteWishList).click();
     }
 }
