@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import waiters.Waiter;
@@ -49,16 +48,11 @@ public class ProductsPage extends BasePage {
     @FindBy(xpath = "//span[@class='goods-tile__title']")
     private WebElement productNameInWishList;
 
-    @FindAll({
-            @FindBy(xpath = "(//button[@class='compare-button'])[1]"),
-            @FindBy(xpath = "(//button[@class='compare-button'])[2]")
-    })
+    @FindBy(xpath = "//button[@class='compare-button']")
+    public List<WebElement> comparisonOfProductsButtons;
 
     @FindBy(xpath = "(//button[@class='compare-button'])[1]")
     private WebElement firstComparisonProduct;
-
-    @FindBy(xpath = "(//button[@class='compare-button'])[2]")
-    private WebElement secondComparisonProduct;
 
     @FindBy(xpath = "//button[@class='button button--white button--small context-menu__toggle']")
     private WebElement addMenuForDeleteProductFromCart;
@@ -101,22 +95,17 @@ public class ProductsPage extends BasePage {
         return kitInCart.getText();
     }
 
-    public String getKitInCartAttribute() {
-        wait.untilVisible(kitInCart);
-        return kitInCart.getAttribute("");
-    }
-
     public String getProductNameInCart() {
         wait.untilVisible(productInCart);
         return productInCart.getText();
     }
 
-    public Boolean getProductNameInCartIsEnabled() {
+    public Boolean isProductNameInCartEnabled() {
         wait.untilVisible(productInCart);
         return productInCart.isEnabled();
     }
 
-    public Boolean getProductNameInCartIsDisplayed() {
+    public Boolean isProductNameInCartDisplayed() {
         wait.untilVisible(productInCart);
         return productInCart.isDisplayed();
     }
@@ -135,7 +124,7 @@ public class ProductsPage extends BasePage {
         wait.untilVisible(cartButtonOnFirstProduct).click();
     }
 
-    public Boolean putFirstProductInCartIsSelected() {
+    public Boolean isFirstProductSelected() {
         return wait.untilVisible(cartButtonOnFirstProduct).isSelected();
     }
 
@@ -163,13 +152,12 @@ public class ProductsPage extends BasePage {
         wait.untilVisible(productTitle).click();
     }
 
-    public void clickToCompareFirstProduct() {
-        wait.untilVisible(firstComparisonProduct).click();
-
+    public List<WebElement> listOfComparisonProductsButtons() {
+        return comparisonOfProductsButtons;
     }
 
-    public void clickToCompareSecondProduct() {
-        wait.untilVisible(secondComparisonProduct).click();
+    public void comparisonButtonIsEnabled() {
+        wait.untilVisible(firstComparisonProduct).isEnabled();
     }
 
     public void clickToDeleteInCartButton() {

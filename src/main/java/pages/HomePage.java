@@ -2,17 +2,39 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import waiters.Waiter;
+
+import java.util.List;
 
 public class HomePage extends BasePage {
     private final Waiter wait;
 
+    @FindBys({
+            @FindBy(xpath = "//button[contains(text(),'Найти')]"),
+            @FindBy(name = "search")
+    })
+    public List<WebElement> searchButtonFindBys;
+
+    @FindAll({
+            @FindBy(xpath = "//button[contains(text(),'Найти')]"),
+            @FindBy(name = "search111")
+    })
+    public List<WebElement> searchButtonFindAll;
+
+    @FindBy(xpath = "//img[@title='Интернет магазин Rozetka.ua - №1']")
+    public WebElement rozetkaImg;
+
+    @FindBy(xpath = "//li[@class='header-topline__language-item']")
+    public List<WebElement> languageRuOrUa;
+
     @FindBy(className = "menu-toggler")
     public WebElement productsCatalogue;
 
-    @FindBy(css = "body > app-root > div > div:nth-child(2) > app-rz-header > header > div > div.header-bottomline > div.menu-outer.js-rz-fat-menu > fat-menu > div > ul > li.menu-categories__item.menu-categories__item_state_hovered > div > div.menu__main-cats > div.menu__main-cats-inner > div:nth-child(1) > ul:nth-child(1) > li > a")
+    @FindBy(xpath = "//a[@class='menu__hidden-title'][last()][contains(text(), 'Ноутбуки')]")
     private WebElement laptopCategory;
 
     @FindBy(linkText = "Товары для геймеров")
@@ -56,21 +78,12 @@ public class HomePage extends BasePage {
         return chooseCity.getText();
     }
 
-    public String searchFieldGetText() {
-        wait.untilVisible(searchField);
-        return chooseCity.getText();
-    }
-
     public void navigateToCategoriesFromMainPage() {
         wait.untilVisible(productsCatalogue).click();
     }
 
     public void navigateToLaptopCategory() {
         wait.untilVisible(laptopCategory).click();
-    }
-    public boolean navigateToLaptopCategory11111() {
-        wait.untilVisible(laptopCategory).getCssValue("menu-categories");
-        return true;
     }
 
     public void productForGamersCategoryClick() {
@@ -110,12 +123,20 @@ public class HomePage extends BasePage {
         wait.untilVisible(searchField).sendKeys("Ноутбук");
     }
 
-    public void clear() {
+    public void clearSearchFieldAfterInput() {
         searchField.clear();
     }
 
-    public void searchButtonClick() {
+    public void submitSearch() {
         wait.untilVisible(searchButton).submit();
+    }
+
+    public List<WebElement> checkNameOfButtonFindByFindBys() {
+        return searchButtonFindBys;
+    }
+
+    public List<WebElement> checkNameOfButtonFindByFindALL() {
+        return searchButtonFindAll;
     }
 }
 

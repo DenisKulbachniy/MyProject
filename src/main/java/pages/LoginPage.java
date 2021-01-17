@@ -1,9 +1,9 @@
 package pages;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import waiters.Waiter;
 
@@ -23,10 +23,6 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//a[@class='header-topline__user-link']")
     private WebElement enterToEnteredAccount;
 
-    @FindBys({
-            @FindBy(id = "auth_email"),
-            @FindBy(xpath = "//*[@id='auth_pass']")
-    })
     @FindBy(xpath = "//button[contains(text(),'Войти')]")
     private WebElement enterButton;
 
@@ -47,6 +43,9 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "(//p[@class='personal-data__value'])[7]")
     private WebElement personnelData;
+
+    @FindBy(xpath = "//h3[contains(text(),'У вас еще нет списков желаний')]")
+    private WebElement emptyWishList;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -71,6 +70,11 @@ public class LoginPage extends BasePage {
         return nameOfCreatedWishList.getText();
     }
 
+    public String getEmptyWishListText() {
+        wait.untilVisible(emptyWishList);
+        return emptyWishList.getText();
+    }
+
     public String getAccountName() {
         wait.untilVisible(personnelData);
         return personnelData.getText();
@@ -80,9 +84,8 @@ public class LoginPage extends BasePage {
         wait.untilVisible(enterButton).click();
     }
 
-    public boolean enterButtonSize() {
-        wait.untilVisible(enterButton).getSize();
-        return true;
+    public Dimension getEnterButtonSize() {
+        return enterButton.getSize();
     }
 
     public void accountWishListClick() {
