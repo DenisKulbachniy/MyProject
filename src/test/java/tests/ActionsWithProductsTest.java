@@ -106,7 +106,7 @@ public class ActionsWithProductsTest extends BaseTest {
         jseHomePage.executeScript("scroll(0, 250);");
         loginPage.accountWishListClick();
         loginPage.createNewWishListClick();
-        loginPage.nameOfNewWishList();
+        loginPage.nameOfNewWishList(LAPTOPS);
         loginPage.addNewListOfWishesClick();
 
         Assert.assertTrue(loginPage.getNameOfWishList().contains(LAPTOPS));

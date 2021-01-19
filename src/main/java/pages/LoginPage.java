@@ -96,8 +96,8 @@ public class LoginPage extends BasePage {
         wait.untilVisible(createNewWishList).click();
     }
 
-    public void nameOfNewWishList() {
-        myListOfWishes.sendKeys("Ноутбуки");
+    public void nameOfNewWishList(String key) {
+        myListOfWishes.sendKeys(key);
     }
 
     public void addNewListOfWishesClick() {
