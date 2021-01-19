@@ -152,11 +152,7 @@ public class ProductsPage extends BasePage {
         wait.untilVisible(productTitle).click();
     }
 
-    public List<WebElement> listOfComparisonProductsButtons() {
-        return comparisonOfProductsButtons;
-    }
-
-    public void comparisonButtonIsEnabled() {
+    public void isComparisonButtonEnabled() {
         wait.untilVisible(firstComparisonProduct).isEnabled();
     }
 

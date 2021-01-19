@@ -16,7 +16,7 @@ public class ActionsWithProductsTest extends BaseTest {
     private static final String CART_IS_EMPTY = "Корзина пуста";
     private static final String PLAYSTATION = "PlayStation";
     public static final String INLINE = "inline";
-    public static final String emptyWishList = "У вас еще нет списков желаний";
+    public static final String EMPTY_WISH_LIST = "У вас еще нет списков желаний";
     HomePage homePage = new HomePage(driver);
     ProductsPage productsPage = new ProductsPage(driver);
     LoginPage loginPage = new LoginPage(driver);
@@ -79,7 +79,7 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.navigateToCategoriesFromMainPage();
 
         String rozetkaImgDisplayCssValue = homePage.rozetkaImg.getCssValue("display");
-        Assert.assertTrue(rozetkaImgDisplayCssValue.contains(INLINE));
+        Assert.assertEquals(rozetkaImgDisplayCssValue, INLINE);
 
         homePage.navigateToLaptopCategory();
         productsPage.clickToFirstProduct();
@@ -92,7 +92,7 @@ public class ActionsWithProductsTest extends BaseTest {
         productsPage.addMenuInWishListClick();
         productsPage.deleteWishListClick();
 
-        Assert.assertTrue(loginPage.getEmptyWishListText().contains(emptyWishList));
+        Assert.assertTrue(loginPage.getEmptyWishListText().contains(EMPTY_WISH_LIST));
     }
 
     @Test
@@ -123,7 +123,7 @@ public class ActionsWithProductsTest extends BaseTest {
         productsPage.addMenuInWishListClick();
         productsPage.deleteWishListClick();
 
-        Assert.assertTrue(loginPage.getEmptyWishListText().contains(emptyWishList));
+        Assert.assertEquals(loginPage.getEmptyWishListText(), EMPTY_WISH_LIST);
     }
 
     @Test
@@ -147,7 +147,7 @@ public class ActionsWithProductsTest extends BaseTest {
         productsPage.addMenuInWishListClick();
         productsPage.deleteWishListClick();
 
-        Assert.assertTrue(loginPage.getEmptyWishListText().contains(emptyWishList));
+        Assert.assertTrue(loginPage.getEmptyWishListText().contains(EMPTY_WISH_LIST));
     }
 
     @Test
@@ -156,9 +156,9 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.languageRuOrUa.get(0).click();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
-        productsPage.comparisonButtonIsEnabled();
-        productsPage.listOfComparisonProductsButtons().get(0).click();
-        productsPage.listOfComparisonProductsButtons().get(1).click();
+        productsPage.isComparisonButtonEnabled();
+        productsPage.comparisonOfProductsButtons.get(0).click();
+        productsPage.comparisonOfProductsButtons.get(1).click();
         homePage.activeHeaderComparisonButtonClick();
         homePage.comparisonListClick();
 

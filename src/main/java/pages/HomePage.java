@@ -15,15 +15,15 @@ public class HomePage extends BasePage {
 
     @FindBys({
             @FindBy(xpath = "//button[contains(text(),'Найти')]"),
-            @FindBy(name = "search")
+            @FindBy(xpath = "//button[@class='button button_color_green button_size_medium search-form__submit']")
     })
-    public List<WebElement> searchButtonFindBys;
+    public WebElement searchButtonFindBys;
 
     @FindAll({
             @FindBy(xpath = "//button[contains(text(),'Найти')]"),
-            @FindBy(name = "search111")
+            @FindBy(name = "search")
     })
-    public List<WebElement> searchButtonFindAll;
+    public WebElement searchButtonFindAll;
 
     @FindBy(xpath = "//img[@title='Интернет магазин Rozetka.ua - №1']")
     public WebElement rozetkaImg;
@@ -66,6 +66,9 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = "//button[@class='button button_color_green button_size_medium search-form__submit']")
     public WebElement searchButton;
+
+    @FindBy(xpath = "//div[@class='search-form__input-wrapper']")
+    public WebElement emptySearchField;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -118,9 +121,9 @@ public class HomePage extends BasePage {
         wait.untilVisible(acceptButtonToChooseCity).click();
     }
 
-    public void inputSearchField() {
+    public void inputSearchField(String key) {
         wait.untilVisible(searchField).click();
-        wait.untilVisible(searchField).sendKeys("Ноутбук");
+        wait.untilVisible(searchField).sendKeys(key);
     }
 
     public void clearSearchFieldAfterInput() {
@@ -128,15 +131,8 @@ public class HomePage extends BasePage {
     }
 
     public void submitSearch() {
-        wait.untilVisible(searchButton).submit();
+        wait.untilVisible(searchField).submit();
     }
 
-    public List<WebElement> checkNameOfButtonFindByFindBys() {
-        return searchButtonFindBys;
-    }
-
-    public List<WebElement> checkNameOfButtonFindByFindALL() {
-        return searchButtonFindAll;
-    }
 }
 

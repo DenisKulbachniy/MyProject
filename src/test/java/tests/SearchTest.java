@@ -16,25 +16,25 @@ public class SearchTest extends BaseTest {
     public void searchTest() {
         homePage.openHomePage();
         homePage.languageRuOrUa.get(0).click();
-        homePage.inputSearchField();
+        homePage.inputSearchField(LAPTOP);
         homePage.submitSearch();
 
         for (WebElement element : productsPage.getAllProductsName())
             Assert.assertTrue(element.getText().contains(LAPTOP));
 
-        for (WebElement element : homePage.checkNameOfButtonFindByFindBys())
-            Assert.assertTrue(element.getText().contains(FIND));
+        Assert.assertEquals(homePage.searchButtonFindAll.getText(), FIND);
 
-        for (WebElement element : homePage.checkNameOfButtonFindByFindALL())
-            Assert.assertTrue(element.getText().contains(FIND));
+        Assert.assertEquals(homePage.searchButtonFindBys.getText(), FIND);
     }
 
     @Test
     public void searchTestWithClear() {
         homePage.openHomePage();
         homePage.languageRuOrUa.get(0).click();
-        homePage.inputSearchField();
+        homePage.inputSearchField(LAPTOP);
         homePage.submitSearch();
         homePage.clearSearchFieldAfterInput();
+
+        Assert.assertEquals(homePage.emptySearchField.getAttribute("class"), "search-form__input-wrapper");
     }
 }
