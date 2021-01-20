@@ -21,7 +21,7 @@ public class HomePage extends BasePage {
 
     @FindAll({
             @FindBy(xpath = "//button[contains(text(),'Найти')]"),
-            @FindBy(name = "search")
+            @FindBy(xpath = "//button[@class='button button_color_green button_size_medium search-form__submit']")
     })
     public WebElement searchButtonFindAll;
 
@@ -31,13 +31,13 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//li[@class='header-topline__language-item']")
     public List<WebElement> languageRuOrUa;
 
-    @FindBy(className = "menu-toggler")
+    @FindBy(xpath = "//span[starts-with(@class, 'menu-toggler__text')]")
     public WebElement productsCatalogue;
 
     @FindBy(xpath = "//a[@class='menu__hidden-title'][last()][contains(text(), 'Ноутбуки')]")
     private WebElement laptopCategory;
 
-    @FindBy(linkText = "Товары для геймеров")
+    @FindBy(xpath = "(//a[contains(text(),'Товары для геймеров')])[1]")
     private WebElement productForGamersCategory;
 
     @FindBy(xpath = "(//span[@class='popular-category__title'])[1]")
@@ -61,7 +61,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//button[@class='button button_size_medium button_color_green']")
     private WebElement acceptButtonToChooseCity;
 
-    @FindBy(name = "search")
+    @FindBy(xpath = "//input[contains(@class, 'search-form')]")
     private WebElement searchField;
 
     @FindBy(xpath = "//button[@class='button button_color_green button_size_medium search-form__submit']")

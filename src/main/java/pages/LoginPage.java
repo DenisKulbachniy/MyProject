@@ -11,7 +11,7 @@ public class LoginPage extends BasePage {
 
     private final Waiter wait;
 
-    @FindBy(id = "auth_email")
+    @FindBy(xpath = "//*[@id='auth_email']")
     private WebElement loginField;
 
     @FindBy(xpath = "//*[@id='auth_pass']")
