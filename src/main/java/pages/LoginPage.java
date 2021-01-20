@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,17 +11,17 @@ public class LoginPage extends BasePage {
 
     private final Waiter wait;
 
+    @FindBy(id = "auth_email")
+    private WebElement loginField;
+
+    @FindBy(xpath = "//*[@id='auth_pass']")
+    private WebElement passwordField;
+
     @FindBy(xpath = "//button[@class='header-topline__user-link button--link']")
     private WebElement enterToAccountLink;
 
     @FindBy(xpath = "//a[@class='header-topline__user-link']")
     private WebElement enterToEnteredAccount;
-
-    @FindBy(xpath = "//*[@id='auth_email']")
-    private WebElement loginField;
-
-    @FindBy(xpath = "//*[@id='auth_pass']")
-    private WebElement passwordField;
 
     @FindBy(xpath = "//button[contains(text(),'Войти')]")
     private WebElement enterButton;
@@ -42,6 +43,9 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "(//p[@class='personal-data__value'])[7]")
     private WebElement personnelData;
+
+    @FindBy(xpath = "//h3[contains(text(),'У вас еще нет списков желаний')]")
+    private WebElement emptyWishList;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -66,6 +70,11 @@ public class LoginPage extends BasePage {
         return nameOfCreatedWishList.getText();
     }
 
+    public String getEmptyWishListText() {
+        wait.untilVisible(emptyWishList);
+        return emptyWishList.getText();
+    }
+
     public String getAccountName() {
         wait.untilVisible(personnelData);
         return personnelData.getText();
@@ -73,6 +82,10 @@ public class LoginPage extends BasePage {
 
     public void enterButtonClick() {
         wait.untilVisible(enterButton).click();
+    }
+
+    public Dimension getEnterButtonSize() {
+        return enterButton.getSize();
     }
 
     public void accountWishListClick() {
@@ -83,8 +96,8 @@ public class LoginPage extends BasePage {
         wait.untilVisible(createNewWishList).click();
     }
 
-    public void nameOfNewWishList() {
-        myListOfWishes.sendKeys("Ноутбуки");
+    public void nameOfNewWishList(String key) {
+        myListOfWishes.sendKeys(key);
     }
 
     public void addNewListOfWishesClick() {
@@ -95,3 +108,5 @@ public class LoginPage extends BasePage {
         wait.untilVisible(enterToEnteredAccount).click();
     }
 }
+
+

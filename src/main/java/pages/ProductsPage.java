@@ -9,6 +9,7 @@ import waiters.Waiter;
 import java.util.List;
 
 public class ProductsPage extends BasePage {
+
     private final Waiter wait;
 
     @FindBy(xpath = "(//button[@class='buy-button goods-tile__buy-button'])[1]")
@@ -32,7 +33,7 @@ public class ProductsPage extends BasePage {
     @FindBy(xpath = "//a[contains(text(),'Приставки PlayStation')]")
     private WebElement playStationCategory;
 
-    @FindBy(xpath = "//span[contains(text(),'PlayStation 5')]")
+    @FindBy(xpath = "//span[contains(text(),'Игровая приставка PlayStation 5 Digital Edition')]")
     private WebElement playStationChoice;
 
     @FindBy(xpath = "//button[@class='button button--small button--navy']")
@@ -47,11 +48,11 @@ public class ProductsPage extends BasePage {
     @FindBy(xpath = "//span[@class='goods-tile__title']")
     private WebElement productNameInWishList;
 
+    @FindBy(xpath = "//button[@class='compare-button']")
+    public List<WebElement> comparisonOfProductsButtons;
+
     @FindBy(xpath = "(//button[@class='compare-button'])[1]")
     private WebElement firstComparisonProduct;
-
-    @FindBy(xpath = "(//button[@class='compare-button'])[2]")
-    private WebElement secondComparisonProduct;
 
     @FindBy(xpath = "//button[@class='button button--white button--small context-menu__toggle']")
     private WebElement addMenuForDeleteProductFromCart;
@@ -99,6 +100,16 @@ public class ProductsPage extends BasePage {
         return productInCart.getText();
     }
 
+    public Boolean isProductNameInCartEnabled() {
+        wait.untilVisible(productInCart);
+        return productInCart.isEnabled();
+    }
+
+    public Boolean isProductNameInCartDisplayed() {
+        wait.untilVisible(productInCart);
+        return productInCart.isDisplayed();
+    }
+
     public String getEmptyCartText() {
         wait.untilVisible(emptyCart);
         return emptyCart.getText();
@@ -111,6 +122,10 @@ public class ProductsPage extends BasePage {
 
     public void putFirstProductInCart() {
         wait.untilVisible(cartButtonOnFirstProduct).click();
+    }
+
+    public Boolean isFirstProductSelected() {
+        return wait.untilVisible(cartButtonOnFirstProduct).isSelected();
     }
 
     public void clickToHeaderCartButton() {
@@ -137,12 +152,8 @@ public class ProductsPage extends BasePage {
         wait.untilVisible(productTitle).click();
     }
 
-    public void clickToCompareFirstProduct() {
-        wait.untilVisible(firstComparisonProduct).click();
-    }
-
-    public void clickToCompareSecondProduct() {
-        wait.untilVisible(secondComparisonProduct).click();
+    public void isComparisonButtonEnabled() {
+        wait.untilVisible(firstComparisonProduct).isEnabled();
     }
 
     public void clickToDeleteInCartButton() {
@@ -156,10 +167,12 @@ public class ProductsPage extends BasePage {
     public void buyKitClick() {
         wait.untilVisible(buyKit).click();
     }
-    public void addMenuInWishListClick(){
+
+    public void addMenuInWishListClick() {
         wait.untilVisible(addMenuInWishList).click();
     }
-    public void deleteWishListClick(){
+
+    public void deleteWishListClick() {
         wait.untilVisible(deleteWishList).click();
     }
 }

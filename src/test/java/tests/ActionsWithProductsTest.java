@@ -15,6 +15,8 @@ public class ActionsWithProductsTest extends BaseTest {
     private static final String TOGETHER_CHEAP = "Вместе дешевле";
     private static final String CART_IS_EMPTY = "Корзина пуста";
     private static final String PLAYSTATION = "PlayStation";
+    public static final String INLINE = "inline";
+    public static final String EMPTY_WISH_LIST = "У вас еще нет списков желаний";
     HomePage homePage = new HomePage(driver);
     ProductsPage productsPage = new ProductsPage(driver);
     LoginPage loginPage = new LoginPage(driver);
@@ -22,17 +24,27 @@ public class ActionsWithProductsTest extends BaseTest {
     @Test
     public void productActionCartTest() {
         homePage.openHomePage();
+        homePage.languageRuOrUa.get(0).click();
+
+        Assert.assertEquals(homePage.productsCatalogue.getAttribute("class"), "menu-toggler");
+
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
         productsPage.putFirstProductInCart();
+
+        Assert.assertFalse(productsPage.isFirstProductSelected());
+
         productsPage.clickToHeaderCartButton();
 
         Assert.assertEquals(productsPage.getFirstProductName(), productsPage.getProductNameInCart());
+        Assert.assertTrue(productsPage.isProductNameInCartEnabled());
+        Assert.assertTrue(productsPage.isProductNameInCartDisplayed());
     }
 
     @Test
     public void productKitActionCartTest() {
         homePage.openHomePage();
+        homePage.languageRuOrUa.get(0).click();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
         productsPage.clickToFirstProduct();
@@ -45,6 +57,7 @@ public class ActionsWithProductsTest extends BaseTest {
     @Test
     public void productActionDeleteFromCartTest() {
         homePage.openHomePage();
+        homePage.languageRuOrUa.get(0).click();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
         productsPage.putFirstProductInCart();
@@ -58,11 +71,16 @@ public class ActionsWithProductsTest extends BaseTest {
     @Test
     public void productActionWishListTest() {
         homePage.openHomePage();
+        homePage.languageRuOrUa.get(0).click();
         loginPage.enterToAccountClick();
         loginPage.inputLoginField(INPUT_FOR_LOGIN);
         loginPage.inputPasswordField(INPUT_FOR_PASSWORD);
         loginPage.enterButtonClick();
         homePage.navigateToCategoriesFromMainPage();
+
+        String rozetkaImgDisplayCssValue = homePage.rozetkaImg.getCssValue("display");
+        Assert.assertEquals(rozetkaImgDisplayCssValue, INLINE);
+
         homePage.navigateToLaptopCategory();
         productsPage.clickToFirstProduct();
         productsPage.clickToProductTitle();
@@ -73,11 +91,14 @@ public class ActionsWithProductsTest extends BaseTest {
 
         productsPage.addMenuInWishListClick();
         productsPage.deleteWishListClick();
+
+        Assert.assertTrue(loginPage.getEmptyWishListText().contains(EMPTY_WISH_LIST));
     }
 
     @Test
     public void wishListNewOwnListCreationTest() {
         homePage.openHomePage();
+        homePage.languageRuOrUa.get(0).click();
         loginPage.enterToAccountClick();
         loginPage.inputLoginField(INPUT_FOR_LOGIN);
         loginPage.inputPasswordField(INPUT_FOR_PASSWORD);
@@ -85,7 +106,7 @@ public class ActionsWithProductsTest extends BaseTest {
         jseHomePage.executeScript("scroll(0, 250);");
         loginPage.accountWishListClick();
         loginPage.createNewWishListClick();
-        loginPage.nameOfNewWishList();
+        loginPage.nameOfNewWishList(LAPTOPS);
         loginPage.addNewListOfWishesClick();
 
         Assert.assertTrue(loginPage.getNameOfWishList().contains(LAPTOPS));
@@ -101,11 +122,14 @@ public class ActionsWithProductsTest extends BaseTest {
 
         productsPage.addMenuInWishListClick();
         productsPage.deleteWishListClick();
+
+        Assert.assertEquals(loginPage.getEmptyWishListText(), EMPTY_WISH_LIST);
     }
 
     @Test
     public void outOfStackProductTest() {
         homePage.openHomePage();
+        homePage.languageRuOrUa.get(0).click();
         loginPage.enterToAccountClick();
         loginPage.inputLoginField(INPUT_FOR_LOGIN);
         loginPage.inputPasswordField(INPUT_FOR_PASSWORD);
@@ -119,15 +143,22 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.activeHeaderWishListButtonClick();
 
         Assert.assertTrue(productsPage.getProductNameInWishList().contains(PLAYSTATION));
+
+        productsPage.addMenuInWishListClick();
+        productsPage.deleteWishListClick();
+
+        Assert.assertTrue(loginPage.getEmptyWishListText().contains(EMPTY_WISH_LIST));
     }
 
     @Test
     public void comparisonOfProductsTest() {
         homePage.openHomePage();
+        homePage.languageRuOrUa.get(0).click();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
-        productsPage.clickToCompareFirstProduct();
-        productsPage.clickToCompareSecondProduct();
+        productsPage.isComparisonButtonEnabled();
+        productsPage.comparisonOfProductsButtons.get(0).click();
+        productsPage.comparisonOfProductsButtons.get(1).click();
         homePage.activeHeaderComparisonButtonClick();
         homePage.comparisonListClick();
 

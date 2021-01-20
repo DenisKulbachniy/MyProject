@@ -6,11 +6,12 @@ import pages.HomePage;
 
 public class ManipulationsWithCitiesTest extends BaseTest {
     private static final String KIEV = "Киев";
-    HomePage homePage = new HomePage(getDriver());
+    HomePage homePage = new HomePage(driver);
 
     @Test
     public void tryToChangeCityTest() {
         homePage.openHomePage();
+        homePage.languageRuOrUa.get(0).click();
         homePage.chooseCityClick();
         homePage.chooseCityFromListOfCitiesClick();
         homePage.acceptButtonToChooseCityClick();

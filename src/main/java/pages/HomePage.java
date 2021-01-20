@@ -2,20 +2,42 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import waiters.Waiter;
+
+import java.util.List;
 
 public class HomePage extends BasePage {
     private final Waiter wait;
 
-    @FindBy(xpath = "//button[@class='menu-toggler']")
-    private WebElement productsCatalogue;
+    @FindBys({
+            @FindBy(xpath = "//button[contains(text(),'Найти')]"),
+            @FindBy(xpath = "//button[@class='button button_color_green button_size_medium search-form__submit']")
+    })
+    public WebElement searchButtonFindBys;
 
-    @FindBy(xpath = "(//a[@class='menu__hidden-title'])[1]")
+    @FindAll({
+            @FindBy(xpath = "//button[contains(text(),'Найти')]"),
+            @FindBy(name = "search")
+    })
+    public WebElement searchButtonFindAll;
+
+    @FindBy(xpath = "//img[@title='Интернет магазин Rozetka.ua - №1']")
+    public WebElement rozetkaImg;
+
+    @FindBy(xpath = "//li[@class='header-topline__language-item']")
+    public List<WebElement> languageRuOrUa;
+
+    @FindBy(className = "menu-toggler")
+    public WebElement productsCatalogue;
+
+    @FindBy(xpath = "//a[@class='menu__hidden-title'][last()][contains(text(), 'Ноутбуки')]")
     private WebElement laptopCategory;
 
-    @FindBy(xpath = "(//a[contains(text(),'Товары для геймеров')])[1]")
+    @FindBy(linkText = "Товары для геймеров")
     private WebElement productForGamersCategory;
 
     @FindBy(xpath = "(//span[@class='popular-category__title'])[1]")
@@ -39,11 +61,14 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//button[@class='button button_size_medium button_color_green']")
     private WebElement acceptButtonToChooseCity;
 
-    @FindBy(xpath = "//input[contains(@class, 'search-form')]")
+    @FindBy(name = "search")
     private WebElement searchField;
 
     @FindBy(xpath = "//button[@class='button button_color_green button_size_medium search-form__submit']")
-    private WebElement searchButton;
+    public WebElement searchButton;
+
+    @FindBy(xpath = "//div[@class='search-form__input-wrapper']")
+    public WebElement emptySearchField;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -96,13 +121,18 @@ public class HomePage extends BasePage {
         wait.untilVisible(acceptButtonToChooseCity).click();
     }
 
-    public void inputSearchField() {
+    public void inputSearchField(String key) {
         wait.untilVisible(searchField).click();
-        wait.untilVisible(searchField).sendKeys("Ноутбук");
+        wait.untilVisible(searchField).sendKeys(key);
     }
 
-    public void searchButtonClick() {
-        wait.untilVisible(searchButton).click();
+    public void clearSearchFieldAfterInput() {
+        searchField.clear();
     }
+
+    public void submitSearch() {
+        wait.untilVisible(searchField).submit();
+    }
+
 }
 
