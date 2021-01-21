@@ -14,60 +14,60 @@ public class HomePage extends BasePage {
     private final Waiter wait;
 
     @FindBys({
-            @FindBy(xpath = "//button[contains(text(),'Найти')]"),
-            @FindBy(xpath = "//button[@class='button button_color_green button_size_medium search-form__submit']")
+            @FindBy(xpath = ".//button[contains(text(),'Найти')]"),
+            @FindBy(xpath = ".//button[@class='button button_color_green button_size_medium search-form__submit']")
     })
     public WebElement searchButtonFindBys;
 
     @FindAll({
-            @FindBy(xpath = "//button[contains(text(),'Найти')]"),
-            @FindBy(xpath = "//button[@class='button button_color_green button_size_medium search-form__submit']")
+            @FindBy(xpath = ".//button[contains(text(),'Найти')]"),
+            @FindBy(xpath = ".//button[@class='button button_color_green button_size_medium search-form__submit']")
     })
     public WebElement searchButtonFindAll;
 
-    @FindBy(xpath = "//img[@title='Интернет магазин Rozetka.ua - №1']")
+    @FindBy(xpath = ".//img[@title='Интернет магазин Rozetka.ua - №1']")
     public WebElement rozetkaImg;
 
-    @FindBy(xpath = "//li[@class='header-topline__language-item']")
+    @FindBy(xpath = ".//li[@class='header-topline__language-item']")
     public List<WebElement> languageRuOrUa;
 
-    @FindBy(xpath = "//span[starts-with(@class, 'menu-toggler__text')]")
+    @FindBy(xpath = ".//span[starts-with(@class, 'menu-toggler__text')]")
     public WebElement productsCatalogue;
 
-    @FindBy(xpath = "//a[@class='menu__hidden-title'][last()][contains(text(), 'Ноутбуки')]")
+    @FindBy(xpath = ".//a[@class='menu__hidden-title'][last()][contains(text(), 'Ноутбуки')]")
     private WebElement laptopCategory;
 
-    @FindBy(xpath = "(//a[contains(text(),'Товары для геймеров')])[1]")
+    @FindBy(xpath = "(.//a[contains(text(),'Товары для геймеров')])[1]")
     private WebElement productForGamersCategory;
 
-    @FindBy(xpath = "(//span[@class='popular-category__title'])[1]")
+    @FindBy(xpath = "(.//span[@class='popular-category__title'])[1]")
     private WebElement playstationStoreCategory;
 
-    @FindBy(xpath = "//a[@class='header-actions__button header-actions__button_type_wish header-actions__button_state_active']")
+    @FindBy(xpath = ".//a[@class='header-actions__button header-actions__button_type_wish header-actions__button_state_active']")
     private WebElement activeHeaderWishListButton;
 
-    @FindBy(xpath = "(//button[@class='header-actions__button header-actions__button_type_compare header-actions__button_state_active'])")
+    @FindBy(xpath = "(.//button[@class='header-actions__button header-actions__button_type_compare header-actions__button_state_active'])")
     private WebElement activeHeaderComparisonButton;
 
-    @FindBy(xpath = "//ul[@class='comparison-modal__list']")
+    @FindBy(xpath = ".//ul[@class='comparison-modal__list']")
     private WebElement comparisonList;
 
-    @FindBy(xpath = "//*[@class='button--link header-cities__label']")
+    @FindBy(xpath = ".//*[@class='button--link header-cities__label']")
     private WebElement chooseCity;
 
-    @FindBy(xpath = "//a[@class='header-location__popular-link']")
+    @FindBy(xpath = ".//a[@class='header-location__popular-link']")
     private WebElement listOfCities;
 
-    @FindBy(xpath = "//button[@class='button button_size_medium button_color_green']")
+    @FindBy(xpath = ".//button[@class='button button_size_medium button_color_green']")
     private WebElement acceptButtonToChooseCity;
 
-    @FindBy(xpath = "//input[contains(@class, 'search-form')]")
+    @FindBy(xpath = ".//input[contains(@class, 'search-form')]")
     private WebElement searchField;
 
-    @FindBy(xpath = "//button[@class='button button_color_green button_size_medium search-form__submit']")
+    @FindBy(xpath = ".//button[@class='button button_color_green button_size_medium search-form__submit']")
     public WebElement searchButton;
 
-    @FindBy(xpath = "//div[@class='search-form__input-wrapper']")
+    @FindBy(xpath = ".//div[@class='search-form__input-wrapper']")
     public WebElement emptySearchField;
 
     public HomePage(WebDriver driver) {

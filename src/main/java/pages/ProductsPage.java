@@ -12,67 +12,67 @@ public class ProductsPage extends BasePage {
 
     private final Waiter wait;
 
-    @FindBy(xpath = "(//button[@class='buy-button goods-tile__buy-button'])[1]")
+    @FindBy(xpath = "(.//button[@class='buy-button goods-tile__buy-button'])[1]")
     private WebElement cartButtonOnFirstProduct;
 
-    @FindBy(xpath = "(//div[@class='header-actions__button-wrapper'])[3]")
+    @FindBy(xpath = "(.//div[@class='header-actions__button-wrapper'])[3]")
     private WebElement headerCartButton;
 
-    @FindBy(xpath = "//div[@class='cart-product__main']")
+    @FindBy(xpath = ".//div[@class='cart-product__main']")
     private WebElement productInCart;
 
-    @FindBy(xpath = "(//span[@class='goods-tile__title'])[1]")
+    @FindBy(xpath = "(.//span[@class='goods-tile__title'])[1]")
     private WebElement firstProduct;
 
-    @FindBy(xpath = "(//span[@class='goods-tile__title'])[2]")
+    @FindBy(xpath = "(.//span[@class='goods-tile__title'])[2]")
     private WebElement secondProduct;
 
-    @FindBy(xpath = "//span[@class='goods-tile__title']")
+    @FindBy(xpath = ".//span[@class='goods-tile__title']")
     private List<WebElement> allProductsNotFirstOnly;
 
-    @FindBy(xpath = "//a[contains(text(),'Приставки PlayStation')]")
+    @FindBy(xpath = ".//a[contains(text(),'Приставки PlayStation')]")
     private WebElement playStationCategory;
 
-    @FindBy(xpath = "//span[contains(text(),'Игровая приставка PlayStation 5 Digital Edition')]")
+    @FindBy(xpath = ".//span[contains(text(),'Игровая приставка PlayStation 5 Digital Edition')]")
     private WebElement playStationChoice;
 
-    @FindBy(xpath = "//button[@class='button button--small button--navy']")
+    @FindBy(xpath = ".//button[@class='button button--small button--navy']")
     private WebElement notifyAboutAppearingOfProductButton1;
 
-    @FindBy(xpath = "//h1[@class='product__title']")
+    @FindBy(xpath = ".//h1[@class='product__title']")
     private WebElement productTitle;
 
-    @FindBy(xpath = "(//button[@class='wish-button js-wish-button'])[1]")
+    @FindBy(xpath = "(.//button[@class='wish-button js-wish-button'])[1]")
     private WebElement firstWishButton;
 
-    @FindBy(xpath = "//span[@class='goods-tile__title']")
+    @FindBy(xpath = ".//span[@class='goods-tile__title']")
     private WebElement productNameInWishList;
 
-    @FindBy(xpath = "//button[@class='compare-button']")
+    @FindBy(xpath = ".//button[@class='compare-button']")
     public List<WebElement> comparisonOfProductsButtons;
 
-    @FindBy(xpath = "(//button[@class='compare-button'])[1]")
+    @FindBy(xpath = "(.//button[@class='compare-button'])[1]")
     private WebElement firstComparisonProduct;
 
-    @FindBy(xpath = "//button[@class='button button--white button--small context-menu__toggle']")
+    @FindBy(xpath = ".//button[@class='button button--white button--small context-menu__toggle']")
     private WebElement addMenuForDeleteProductFromCart;
 
-    @FindBy(xpath = "//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']")
+    @FindBy(xpath = ".//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']")
     private WebElement deleteInCartButton;
 
-    @FindBy(xpath = "//h4[@class='cart-dummy__heading']")
+    @FindBy(xpath = ".//h4[@class='cart-dummy__heading']")
     private WebElement emptyCart;
 
-    @FindBy(xpath = "//button[@class='buy-button button button--large button--with-icon button--green buy-kit']")
+    @FindBy(xpath = ".//button[@class='buy-button button button--large button--with-icon button--green buy-kit']")
     private WebElement buyKit;
 
-    @FindBy(xpath = "//div[@class='cart-kits']")
+    @FindBy(xpath = ".//div[@class='cart-kits']")
     private WebElement kitInCart;
 
-    @FindBy(xpath = "//button[@class='button button_color_white button_size_medium dropdown-css__toggle']")
+    @FindBy(xpath = ".//button[@class='button button_color_white button_size_medium dropdown-css__toggle']")
     private WebElement addMenuInWishList;
 
-    @FindBy(xpath = "//button[@class='button button_color_white button_size_medium dropdown-css__control js-delete-wishlist']")
+    @FindBy(xpath = ".//button[@class='button button_color_white button_size_medium dropdown-css__control js-delete-wishlist']")
     private WebElement deleteWishList;
 
     public ProductsPage(WebDriver driver) {

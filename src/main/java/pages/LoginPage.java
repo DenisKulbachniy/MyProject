@@ -11,40 +11,40 @@ public class LoginPage extends BasePage {
 
     private final Waiter wait;
 
-    @FindBy(xpath = "//*[@id='auth_email']")
+    @FindBy(xpath = ".//*[@id='auth_email']")
     private WebElement loginField;
 
-    @FindBy(xpath = "//*[@id='auth_pass']")
+    @FindBy(xpath = ".//*[@id='auth_pass']")
     private WebElement passwordField;
 
-    @FindBy(xpath = "//button[@class='header-topline__user-link button--link']")
+    @FindBy(xpath = ".//button[@class='header-topline__user-link button--link']")
     private WebElement enterToAccountLink;
 
-    @FindBy(xpath = "//a[@class='header-topline__user-link']")
+    @FindBy(xpath = ".//a[@class='header-topline__user-link']")
     private WebElement enterToEnteredAccount;
 
-    @FindBy(xpath = "//button[contains(text(),'Войти')]")
+    @FindBy(xpath = ".//button[contains(text(),'Войти')]")
     private WebElement enterButton;
 
-    @FindBy(xpath = "/html/body/app-root/div/div[1]/app-rz-main-page/div/aside/main-page-sidebar/ul/li[2]/a")
+    @FindBy(xpath = "./html/body/app-root/div/div[1]/app-rz-main-page/div/aside/main-page-sidebar/ul/li[2]/a")
     private WebElement accountWishList;
 
-    @FindBy(xpath = "//button[contains(text(), 'Создать список желаний')]")
+    @FindBy(xpath = ".//button[contains(text(), 'Создать список желаний')]")
     private WebElement createNewWishList;
 
-    @FindBy(xpath = "(//div[contains(text(), '')]/following::input[2])[1]")
+    @FindBy(xpath = "(.//div[contains(text(), '')]/following::input[2])[1]")
     private WebElement myListOfWishes;
 
-    @FindBy(xpath = "//button[@class='button button_size_medium button_color_navy']")
+    @FindBy(xpath = ".//button[@class='button button_size_medium button_color_navy']")
     private WebElement addNewListOfWishes;
 
-    @FindBy(xpath = "//h3[@class='wish-details__heading']")
+    @FindBy(xpath = ".//h3[@class='wish-details__heading']")
     private WebElement nameOfCreatedWishList;
 
-    @FindBy(xpath = "(//p[@class='personal-data__value'])[7]")
+    @FindBy(xpath = "(.//p[@class='personal-data__value'])[7]")
     private WebElement personnelData;
 
-    @FindBy(xpath = "//h3[contains(text(),'У вас еще нет списков желаний')]")
+    @FindBy(xpath = ".//h3[contains(text(),'У вас еще нет списков желаний')]")
     private WebElement emptyWishList;
 
     public LoginPage(WebDriver driver) {
