@@ -12,40 +12,34 @@ public class ProductsPage extends BasePage {
 
     private final Waiter wait;
 
-    @FindBy(xpath = "(.//button[@class='buy-button goods-tile__buy-button'])[1]")
-    private WebElement cartButtonOnFirstProduct;
+    @FindBy(xpath = ".//button[contains(@class, 'buy-button')]")
+    public List<WebElement> cartButton;
 
-    @FindBy(xpath = "(.//div[@class='header-actions__button-wrapper'])[3]")
+    @FindBy(xpath = ".//a[contains(@class, 'basket')]")
     private WebElement headerCartButton;
 
-    @FindBy(xpath = ".//div[@class='cart-product__main']")
+    @FindBy(xpath = ".//div[contains(@class, 'product__main')]")
     private WebElement productInCart;
 
-    @FindBy(xpath = "(.//span[@class='goods-tile__title'])[1]")
+    @FindBy(xpath = "(.//span[@class='goods-tile__title'])[1]")    // i need it
     private WebElement firstProduct;
 
-    @FindBy(xpath = "(.//span[@class='goods-tile__title'])[2]")
-    private WebElement secondProduct;
+    @FindBy(xpath = ".//span[contains(@class, 'tile__title')]")
+    public List<WebElement> allProductsNotFirstOnly;
 
-    @FindBy(xpath = ".//span[@class='goods-tile__title']")
-    private List<WebElement> allProductsNotFirstOnly;
+    @FindBy(xpath = ".//span[contains(text(),'PlayStation 5')]")
+    public List<WebElement> playStationProductChoice;
 
-    @FindBy(xpath = ".//a[contains(text(),'Приставки PlayStation')]")
-    private WebElement playStationCategory;
-
-    @FindBy(xpath = ".//span[contains(text(),'Игровая приставка PlayStation 5 Digital Edition')]")
-    private WebElement playStationChoice;
-
-    @FindBy(xpath = ".//button[@class='button button--small button--navy']")
-    private WebElement notifyAboutAppearingOfProductButton1;
+    @FindBy(xpath = ".//button[contains(text(),'Сообщить')]")
+    private WebElement notifyAboutAppearingOfProductButton;
 
     @FindBy(xpath = ".//h1[@class='product__title']")
     private WebElement productTitle;
 
-    @FindBy(xpath = "(.//button[@class='wish-button js-wish-button'])[1]")
-    private WebElement firstWishButton;
+    @FindBy(xpath = ".//button[contains(@class, 'wish')]")
+    public List<WebElement> wishButton;
 
-    @FindBy(xpath = ".//span[@class='goods-tile__title']")
+    @FindBy(xpath = ".//span[contains(@class,'tile__title')]")
     private WebElement productNameInWishList;
 
     @FindBy(xpath = ".//button[@class='compare-button']")
@@ -54,25 +48,25 @@ public class ProductsPage extends BasePage {
     @FindBy(xpath = "(.//button[@class='compare-button'])[1]")
     private WebElement firstComparisonProduct;
 
-    @FindBy(xpath = ".//button[@class='button button--white button--small context-menu__toggle']")
+    @FindBy(xpath = ".//button[contains(@class, 'context-menu')]")
     private WebElement addMenuForDeleteProductFromCart;
 
-    @FindBy(xpath = ".//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']")
+    @FindBy(xpath = ".//button[contains(@class, 'menu-actions')]")
     private WebElement deleteInCartButton;
 
-    @FindBy(xpath = ".//h4[@class='cart-dummy__heading']")
+    @FindBy(xpath = ".//h4[contains(@class, 'cart')]")
     private WebElement emptyCart;
 
-    @FindBy(xpath = ".//button[@class='buy-button button button--large button--with-icon button--green buy-kit']")
+    @FindBy(xpath = ".//button[contains(@class, 'buy-kit')]")
     private WebElement buyKit;
 
     @FindBy(xpath = ".//div[@class='cart-kits']")
     private WebElement kitInCart;
 
-    @FindBy(xpath = ".//button[@class='button button_color_white button_size_medium dropdown-css__toggle']")
+    @FindBy(xpath = ".//button[contains(@class, 'dropdown-css__toggle')]")
     private WebElement addMenuInWishList;
 
-    @FindBy(xpath = ".//button[@class='button button_color_white button_size_medium dropdown-css__control js-delete-wishlist']")
+    @FindBy(xpath = ".//button[contains(@class, 'delete-wishlist')]")
     private WebElement deleteWishList;
 
     public ProductsPage(WebDriver driver) {
@@ -84,10 +78,6 @@ public class ProductsPage extends BasePage {
     public String getProductNameInWishList() {
         wait.untilVisible(productNameInWishList);
         return productNameInWishList.getText();
-    }
-
-    public List<WebElement> getAllProductsName() {
-        return allProductsNotFirstOnly;
     }
 
     public String getKitInCartText() {
@@ -110,6 +100,10 @@ public class ProductsPage extends BasePage {
         return productInCart.isDisplayed();
     }
 
+    public void isFirstProductDisplayed() {
+        wait.untilVisible(firstProduct).isDisplayed();
+    }
+
     public String getEmptyCartText() {
         wait.untilVisible(emptyCart);
         return emptyCart.getText();
@@ -120,28 +114,12 @@ public class ProductsPage extends BasePage {
         return firstProduct.getText();
     }
 
-    public void putFirstProductInCart() {
-        wait.untilVisible(cartButtonOnFirstProduct).click();
-    }
-
-    public Boolean isFirstProductSelected() {
-        return wait.untilVisible(cartButtonOnFirstProduct).isSelected();
-    }
-
     public void clickToHeaderCartButton() {
         wait.untilVisible(headerCartButton).click();
     }
 
-    public void playStationChoiceClick() {
-        wait.untilVisible(playStationChoice).click();
-    }
-
     public void notifyAboutAppearingOfProductButtonClick() {
-        wait.untilVisible(notifyAboutAppearingOfProductButton1).click();
-    }
-
-    public void firstWishButtonClick() {
-        wait.untilVisible(firstWishButton).click();
+        wait.untilVisible(notifyAboutAppearingOfProductButton).click();
     }
 
     public void clickToFirstProduct() {

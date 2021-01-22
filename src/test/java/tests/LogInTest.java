@@ -2,6 +2,7 @@ package tests;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.WebElement;
 import pages.HomePage;
 import pages.LoginPage;
 
@@ -29,6 +30,7 @@ public class LogInTest extends BaseTest {
         loginPage.enterToEnteredAccClick();
         loginPage.enterToEnteredAccClick();
 
-        Assert.assertTrue(loginPage.getAccountName().contains(INPUT_FOR_LOGIN));
+        for (WebElement element: loginPage.personnelData)
+        Assert.assertEquals(element.getText(),(INPUT_FOR_LOGIN));
     }
 }
