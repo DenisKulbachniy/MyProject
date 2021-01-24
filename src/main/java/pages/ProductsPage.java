@@ -46,7 +46,7 @@ public class ProductsPage extends BasePage {
     public List<WebElement> comparisonOfProductsButtons;
 
     @FindBy(xpath = "(.//button[@class='compare-button'])[1]")
-    private WebElement firstComparisonProduct;
+    public WebElement firstComparisonProduct;
 
     @FindBy(xpath = ".//button[contains(@class, 'context-menu')]")
     private WebElement addMenuForDeleteProductFromCart;

@@ -6,6 +6,7 @@ import org.testng.Assert;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.ProductsPage;
+import waiters.Waiter;
 
 public class ActionsWithProductsTest extends BaseTest {
     private static final String INPUT_FOR_LOGIN = "Petrovartem01061996@gmail.com";
@@ -27,7 +28,7 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.languageRuOrUa.get(0).click();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
-        productsPage.isFirstProductDisplayed();
+        //productsPage.isFirstProductDisplayed();
         productsPage.cartButton.get(0).click();
         productsPage.clickToHeaderCartButton();
 
@@ -110,6 +111,7 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.navigateToLaptopCategory();
         productsPage.clickToFirstProduct();
         productsPage.clickToProductTitle();
+
         productsPage.wishButton.get(0).click();
         homePage.activeHeaderWishListButtonClick();
 
