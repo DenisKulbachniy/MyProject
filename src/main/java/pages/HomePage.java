@@ -14,60 +14,60 @@ public class HomePage extends BasePage {
     private final Waiter wait;
 
     @FindBys({
-            @FindBy(xpath = "//button[contains(text(),'Найти')]"),
-            @FindBy(xpath = "//button[@class='button button_color_green button_size_medium search-form__submit']")
+            @FindBy(xpath = ".//button[contains(text(),'Найти')]"),
+            @FindBy(xpath = ".//button[contains(@class,'form__submit')]")
     })
     public WebElement searchButtonFindBys;
 
     @FindAll({
-            @FindBy(xpath = "//button[contains(text(),'Найти')]"),
-            @FindBy(name = "search")
+            @FindBy(xpath = ".//button[contains(text(),'Найти')]"),
+            @FindBy(xpath = ".//button[contains(@class,'form__submit')]")
     })
     public WebElement searchButtonFindAll;
 
-    @FindBy(xpath = "//img[@title='Интернет магазин Rozetka.ua - №1']")
+    @FindBy(xpath = ".//img[contains(@title, 'Rozetka.ua')]")
     public WebElement rozetkaImg;
 
-    @FindBy(xpath = "//li[@class='header-topline__language-item']")
+    @FindBy(xpath = ".//li[contains(@class, 'language')]")
     public List<WebElement> languageRuOrUa;
 
-    @FindBy(className = "menu-toggler")
+    @FindBy(xpath = ".//span[starts-with(@class, 'menu')]")
     public WebElement productsCatalogue;
 
-    @FindBy(xpath = "//a[@class='menu__hidden-title'][last()][contains(text(), 'Ноутбуки')]")
+    @FindBy(xpath = ".//a[contains(@class, 'hidden') and contains(text(), 'Ноутбуки')]")
     private WebElement laptopCategory;
 
-    @FindBy(linkText = "Товары для геймеров")
+    @FindBy(xpath = ".//a[contains(@class,'hidden') and contains(text(), 'Товары для геймеров')]")
     private WebElement productForGamersCategory;
 
-    @FindBy(xpath = "(//span[@class='popular-category__title'])[1]")
+    @FindBy(xpath = ".//span[contains(@class, 'popular') and contains(text(),'PlayStation')]")
     private WebElement playstationStoreCategory;
 
-    @FindBy(xpath = "//a[@class='header-actions__button header-actions__button_type_wish header-actions__button_state_active']")
+    @FindBy(xpath = ".//a[contains(@class, 'wish header')]")
     private WebElement activeHeaderWishListButton;
 
-    @FindBy(xpath = "(//button[@class='header-actions__button header-actions__button_type_compare header-actions__button_state_active'])")
+    @FindBy(xpath = ".//button[contains(@class, 'compare header')]")
     private WebElement activeHeaderComparisonButton;
 
-    @FindBy(xpath = "//ul[@class='comparison-modal__list']")
+    @FindBy(xpath = ".//ul[contains(@class, 'comparison')]")
     private WebElement comparisonList;
 
-    @FindBy(xpath = "//*[@class='button--link header-cities__label']")
+    @FindBy(xpath = ".//button[contains(@class, 'header-cities')]")
     private WebElement chooseCity;
 
-    @FindBy(xpath = "//a[@class='header-location__popular-link']")
+    @FindBy(xpath = ".//a[@class='header-location__popular-link']")
     private WebElement listOfCities;
 
-    @FindBy(xpath = "//button[@class='button button_size_medium button_color_green']")
+    @FindBy(xpath = ".//button[contains(text(), 'Применить')]")
     private WebElement acceptButtonToChooseCity;
 
-    @FindBy(name = "search")
+    @FindBy(xpath = ".//input[contains(@class, 'search-form')]")
     private WebElement searchField;
 
-    @FindBy(xpath = "//button[@class='button button_color_green button_size_medium search-form__submit']")
+    @FindBy(xpath = ".//button[contains(text(),'Найти')]")
     public WebElement searchButton;
 
-    @FindBy(xpath = "//div[@class='search-form__input-wrapper']")
+    @FindBy(xpath = ".//div[contains(@class, 'input-wrapper')]")
     public WebElement emptySearchField;
 
     public HomePage(WebDriver driver) {

@@ -19,7 +19,7 @@ public class SearchTest extends BaseTest {
         homePage.inputSearchField(LAPTOP);
         homePage.submitSearch();
 
-        for (WebElement element : productsPage.getAllProductsName())
+        for (WebElement element : productsPage.allProductsNotFirstOnly)
             Assert.assertTrue(element.getText().contains(LAPTOP));
 
         Assert.assertEquals(homePage.searchButtonFindAll.getText(), FIND);

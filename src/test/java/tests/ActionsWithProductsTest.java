@@ -25,15 +25,10 @@ public class ActionsWithProductsTest extends BaseTest {
     public void productActionCartTest() {
         homePage.openHomePage();
         homePage.languageRuOrUa.get(0).click();
-
-        Assert.assertEquals(homePage.productsCatalogue.getAttribute("class"), "menu-toggler");
-
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
-        productsPage.putFirstProductInCart();
-
-        Assert.assertFalse(productsPage.isFirstProductSelected());
-
+        productsPage.isFirstProductDisplayed();
+        productsPage.cartButton.get(0).click();
         productsPage.clickToHeaderCartButton();
 
         Assert.assertEquals(productsPage.getFirstProductName(), productsPage.getProductNameInCart());
@@ -60,7 +55,7 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.languageRuOrUa.get(0).click();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
-        productsPage.putFirstProductInCart();
+        productsPage.cartButton.get(0).click();
         productsPage.clickToHeaderCartButton();
         productsPage.addMenuForDeleteProductFromCartClick();
         productsPage.clickToDeleteInCartButton();
@@ -84,7 +79,7 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.navigateToLaptopCategory();
         productsPage.clickToFirstProduct();
         productsPage.clickToProductTitle();
-        productsPage.firstWishButtonClick();
+        productsPage.wishButton.get(0).click();
         homePage.activeHeaderWishListButtonClick();
 
         Assert.assertTrue(productsPage.getProductNameInWishList().contains(LAPTOP));
@@ -115,7 +110,7 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.navigateToLaptopCategory();
         productsPage.clickToFirstProduct();
         productsPage.clickToProductTitle();
-        productsPage.firstWishButtonClick();
+        productsPage.wishButton.get(0).click();
         homePage.activeHeaderWishListButtonClick();
 
         Assert.assertTrue(productsPage.getProductNameInWishList().contains(LAPTOP));
@@ -137,7 +132,7 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.navigateToCategoriesFromMainPage();
         homePage.productForGamersCategoryClick();
         homePage.playstationCategoryClick();
-        productsPage.playStationChoiceClick();
+        productsPage.playStationProductChoice.get(0).click();
         productsPage.clickToProductTitle();
         productsPage.notifyAboutAppearingOfProductButtonClick();
         homePage.activeHeaderWishListButtonClick();
@@ -162,7 +157,7 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.activeHeaderComparisonButtonClick();
         homePage.comparisonListClick();
 
-        for (WebElement element : productsPage.getAllProductsName()) {
+        for (WebElement element : productsPage.allProductsNotFirstOnly) {
             Assert.assertTrue(element.getText().contains(LAPTOP));
         }
     }
