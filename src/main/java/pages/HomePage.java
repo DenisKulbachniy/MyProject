@@ -10,6 +10,7 @@ import waiters.Waiter;
 import java.util.List;
 
 public class HomePage extends BasePage {
+    WebDriver driver;
     private final Waiter wait;
     private static final String LAPTOPS = "Ноутбуки";
 

@@ -10,7 +10,7 @@ import waiters.Waiter;
 import java.util.List;
 
 public class ProductsPage extends BasePage {
-
+    WebDriver driver;
     private final Waiter wait;
 
     @FindAll({

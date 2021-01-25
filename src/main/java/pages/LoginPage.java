@@ -10,7 +10,7 @@ import waiters.Waiter;
 import java.util.List;
 
 public class LoginPage extends BasePage {
-
+    WebDriver driver;
     private final Waiter wait;
 
     @FindBy(xpath = ".//input[@id='auth_email']")
