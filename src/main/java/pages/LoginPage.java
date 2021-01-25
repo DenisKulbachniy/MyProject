@@ -104,6 +104,10 @@ public class LoginPage extends BasePage {
     public void enterToEnteredAccClick() {
         wait.untilVisible(enterToEnteredAccount).click();
     }
+
+    public void enterButtonToBeClickable() {
+        wait.toBeClickableWait(enterButton);
+    }
 }
 
 

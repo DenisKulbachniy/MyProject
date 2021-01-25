@@ -22,8 +22,6 @@ public class SearchTest extends BaseTest {
         for (WebElement element : productsPage.allProductsNotFirstOnly)
             Assert.assertTrue(element.getText().contains(LAPTOP));
 
-        Assert.assertEquals(homePage.searchButtonFindAll.getText(), FIND);
-
         Assert.assertEquals(homePage.searchButtonFindBys.getText(), FIND);
     }
 

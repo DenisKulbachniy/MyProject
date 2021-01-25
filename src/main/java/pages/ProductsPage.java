@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import waiters.Waiter;
@@ -12,6 +13,12 @@ public class ProductsPage extends BasePage {
 
     private final Waiter wait;
 
+    @FindAll({
+            @FindBy(xpath = ".//button[contains(text(),'Ноутбук')]"),
+            @FindBy(xpath = ".//span[contains(@class,'tile__title')]")
+    })
+    public WebElement productInCartFindAll;
+
     @FindBy(xpath = ".//button[contains(@class, 'buy-button')]")
     public List<WebElement> cartButton;
 
@@ -20,9 +27,6 @@ public class ProductsPage extends BasePage {
 
     @FindBy(xpath = ".//div[contains(@class, 'product__main')]")
     private WebElement productInCart;
-
-    @FindBy(xpath = "(.//span[@class='goods-tile__title'])[1]")    // i need it
-    private WebElement firstProduct;
 
     @FindBy(xpath = ".//span[contains(@class, 'tile__title')]")
     public List<WebElement> allProductsNotFirstOnly;
@@ -40,13 +44,10 @@ public class ProductsPage extends BasePage {
     public List<WebElement> wishButton;
 
     @FindBy(xpath = ".//span[contains(@class,'tile__title')]")
-    private WebElement productNameInWishList;
+    public List<WebElement> productName;
 
     @FindBy(xpath = ".//button[@class='compare-button']")
     public List<WebElement> comparisonOfProductsButtons;
-
-    @FindBy(xpath = "(.//button[@class='compare-button'])[1]")
-    public WebElement firstComparisonProduct;
 
     @FindBy(xpath = ".//button[contains(@class, 'context-menu')]")
     private WebElement addMenuForDeleteProductFromCart;
@@ -75,11 +76,6 @@ public class ProductsPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public String getProductNameInWishList() {
-        wait.untilVisible(productNameInWishList);
-        return productNameInWishList.getText();
-    }
-
     public String getKitInCartText() {
         wait.untilVisible(kitInCart);
         return kitInCart.getText();
@@ -100,18 +96,9 @@ public class ProductsPage extends BasePage {
         return productInCart.isDisplayed();
     }
 
-    public void isFirstProductDisplayed() {
-        wait.untilVisible(firstProduct).isDisplayed();
-    }
-
     public String getEmptyCartText() {
         wait.untilVisible(emptyCart);
         return emptyCart.getText();
-    }
-
-    public String getFirstProductName() {
-        wait.untilVisible(firstProduct);
-        return firstProduct.getText();
     }
 
     public void clickToHeaderCartButton() {
@@ -122,16 +109,8 @@ public class ProductsPage extends BasePage {
         wait.untilVisible(notifyAboutAppearingOfProductButton).click();
     }
 
-    public void clickToFirstProduct() {
-        wait.untilVisible(firstProduct).click();
-    }
-
     public void clickToProductTitle() {
         wait.untilVisible(productTitle).click();
-    }
-
-    public void isComparisonButtonEnabled() {
-        wait.untilVisible(firstComparisonProduct).isEnabled();
     }
 
     public void clickToDeleteInCartButton() {
@@ -152,5 +131,21 @@ public class ProductsPage extends BasePage {
 
     public void deleteWishListClick() {
         wait.untilVisible(deleteWishList).click();
+    }
+
+    public void visibilityOfComparisonProductsButtons() {
+        wait.visibilityOfAllElementsForListOfWebElements(comparisonOfProductsButtons);
+    }
+
+    public void visibilityOfCartButtons() {
+        wait.visibilityOfAllElementsForListOfWebElements(cartButton);
+    }
+
+    public void visibilityOfProductsName() {
+        wait.visibilityOfAllElementsForListOfWebElements(productName);
+    }
+
+    public void fluentVisibilityOfCartButtons() {
+        wait.waitFluent(cartButton);
     }
 }

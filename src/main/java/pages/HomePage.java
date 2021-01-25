@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -12,18 +11,13 @@ import java.util.List;
 
 public class HomePage extends BasePage {
     private final Waiter wait;
+    private static final String LAPTOPS = "Ноутбуки";
 
     @FindBys({
             @FindBy(xpath = ".//button[contains(text(),'Найти')]"),
             @FindBy(xpath = ".//button[contains(@class,'form__submit')]")
     })
     public WebElement searchButtonFindBys;
-
-    @FindAll({
-            @FindBy(xpath = ".//button[contains(text(),'Найти')]"),
-            @FindBy(xpath = ".//button[contains(@class,'form__submit')]")
-    })
-    public WebElement searchButtonFindAll;
 
     @FindBy(xpath = ".//img[contains(@title, 'Rozetka.ua')]")
     public WebElement rozetkaImg;
@@ -134,5 +128,8 @@ public class HomePage extends BasePage {
         wait.untilVisible(searchField).submit();
     }
 
+    public void laptopsTextIsPresent() {
+        wait.textToBePresentInElementWaiter(laptopCategory, LAPTOPS);
+    }
 }
 
