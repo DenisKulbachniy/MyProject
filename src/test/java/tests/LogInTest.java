@@ -11,7 +11,6 @@ public class LogInTest extends BaseTest {
     private static final String INPUT_FOR_LOGIN = "petrovartem01061996@gmail.com";
     private static final String INPUT_FOR_PASSWORD = "01061996Artem";
     public static final int WIDTH = 322;
-
     HomePage homePage = new HomePage(driver);
     LoginPage loginPage = new LoginPage(driver);
 
@@ -19,6 +18,7 @@ public class LogInTest extends BaseTest {
     public void logInToAcc() {
         homePage.openHomePage();
         homePage.languageRuOrUa.get(0).click();
+
         loginPage.enterToAccountClick();
         loginPage.inputLoginField(INPUT_FOR_LOGIN);
         loginPage.inputPasswordField(INPUT_FOR_PASSWORD);
@@ -26,11 +26,12 @@ public class LogInTest extends BaseTest {
 
         Assert.assertEquals(loginPage.getEnterButtonSize().getWidth(), WIDTH);
 
+        loginPage.enterButtonToBeClickable();
         loginPage.enterButtonClick();
         loginPage.enterToEnteredAccClick();
         loginPage.enterToEnteredAccClick();
 
-        for (WebElement element: loginPage.personnelData)
-        Assert.assertEquals(element.getText(),(INPUT_FOR_LOGIN));
+        for (WebElement element : loginPage.personnelData)
+            Assert.assertEquals(element.getText(), (INPUT_FOR_LOGIN));
     }
 }

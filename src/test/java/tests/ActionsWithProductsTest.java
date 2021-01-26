@@ -27,11 +27,11 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.languageRuOrUa.get(0).click();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
-        productsPage.isFirstProductDisplayed();
+        productsPage.visibilityOfCartButtons();
         productsPage.cartButton.get(0).click();
         productsPage.clickToHeaderCartButton();
 
-        Assert.assertEquals(productsPage.getFirstProductName(), productsPage.getProductNameInCart());
+        Assert.assertEquals(productsPage.productInCartFindAll.getText(), productsPage.getProductNameInCart());
         Assert.assertTrue(productsPage.isProductNameInCartEnabled());
         Assert.assertTrue(productsPage.isProductNameInCartDisplayed());
     }
@@ -42,7 +42,7 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.languageRuOrUa.get(0).click();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
-        productsPage.clickToFirstProduct();
+        productsPage.productName.get(0).click();
         jse.executeScript("scroll(0, 2500);");
         productsPage.buyKitClick();
 
@@ -55,6 +55,7 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.languageRuOrUa.get(0).click();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
+        productsPage.fluentVisibilityOfCartButtons();
         productsPage.cartButton.get(0).click();
         productsPage.clickToHeaderCartButton();
         productsPage.addMenuForDeleteProductFromCartClick();
@@ -77,12 +78,13 @@ public class ActionsWithProductsTest extends BaseTest {
         Assert.assertEquals(rozetkaImgDisplayCssValue, INLINE);
 
         homePage.navigateToLaptopCategory();
-        productsPage.clickToFirstProduct();
+        productsPage.visibilityOfProductsName();
+        productsPage.productName.get(0).click();
         productsPage.clickToProductTitle();
         productsPage.wishButton.get(0).click();
         homePage.activeHeaderWishListButtonClick();
 
-        Assert.assertTrue(productsPage.getProductNameInWishList().contains(LAPTOP));
+        Assert.assertTrue(productsPage.productName.get(0).getText().contains(LAPTOP));
 
         productsPage.addMenuInWishListClick();
         productsPage.deleteWishListClick();
@@ -108,12 +110,13 @@ public class ActionsWithProductsTest extends BaseTest {
 
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
-        productsPage.clickToFirstProduct();
+        productsPage.visibilityOfProductsName();
+        productsPage.productName.get(0).click();
         productsPage.clickToProductTitle();
         productsPage.wishButton.get(0).click();
         homePage.activeHeaderWishListButtonClick();
 
-        Assert.assertTrue(productsPage.getProductNameInWishList().contains(LAPTOP));
+        Assert.assertTrue(productsPage.productName.get(0).getText().contains(LAPTOP));
 
         productsPage.addMenuInWishListClick();
         productsPage.deleteWishListClick();
@@ -137,7 +140,8 @@ public class ActionsWithProductsTest extends BaseTest {
         productsPage.notifyAboutAppearingOfProductButtonClick();
         homePage.activeHeaderWishListButtonClick();
 
-        Assert.assertTrue(productsPage.getProductNameInWishList().contains(PLAYSTATION));
+        productsPage.visibilityOfProductsName();
+        Assert.assertTrue(productsPage.productName.get(0).getText().contains(PLAYSTATION));
 
         productsPage.addMenuInWishListClick();
         productsPage.deleteWishListClick();
@@ -150,8 +154,9 @@ public class ActionsWithProductsTest extends BaseTest {
         homePage.openHomePage();
         homePage.languageRuOrUa.get(0).click();
         homePage.navigateToCategoriesFromMainPage();
+        homePage.laptopsTextIsPresent();
         homePage.navigateToLaptopCategory();
-        productsPage.isComparisonButtonEnabled();
+        productsPage.visibilityOfComparisonProductsButtons();
         productsPage.comparisonOfProductsButtons.get(0).click();
         productsPage.comparisonOfProductsButtons.get(1).click();
         homePage.activeHeaderComparisonButtonClick();
