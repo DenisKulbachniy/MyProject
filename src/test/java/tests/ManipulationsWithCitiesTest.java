@@ -10,8 +10,6 @@ public class ManipulationsWithCitiesTest extends BaseTest {
 
     @Test
     public void tryToChangeCityTest() {
-        homePage.openHomePage();
-        homePage.languageRuOrUa.get(0).click();
         homePage.chooseCityClick();
         homePage.chooseCityFromListOfCitiesClick();
         homePage.acceptButtonToChooseCityClick();

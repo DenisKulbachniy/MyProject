@@ -1,6 +1,6 @@
 package pages;
 
-import org.openqa.selenium.Dimension;
+import models.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,6 +12,8 @@ import java.util.List;
 public class LoginPage extends BasePage {
     WebDriver driver;
     private final Waiter wait;
+    private static final String INPUT_FOR_LOGIN = "petrovartem01061996@gmail.com";
+    private static final String INPUT_FOR_PASSWORD = "01061996Artem";
 
     @FindBy(xpath = ".//input[@id='auth_email']")
     private WebElement loginField;
@@ -81,10 +83,6 @@ public class LoginPage extends BasePage {
         wait.untilVisible(enterButton).click();
     }
 
-    public Dimension getEnterButtonSize() {
-        return enterButton.getSize();
-    }
-
     public void accountWishListClick() {
         wait.untilVisible(accountWishList).click();
     }
@@ -105,8 +103,16 @@ public class LoginPage extends BasePage {
         wait.untilVisible(enterToEnteredAccount).click();
     }
 
-    public void enterButtonToBeClickable() {
-        wait.toBeClickableWait(enterButton);
+    public void goToAccountPage() {
+        enterToEnteredAccClick();
+        enterToEnteredAccClick();
+    }
+
+    public void login(User user) {
+        enterToAccountClick();
+        inputLoginField(user.getLogin());
+        inputPasswordField(user.getPassword());
+        enterButtonClick();
     }
 }
 

@@ -14,8 +14,6 @@ public class SearchTest extends BaseTest {
 
     @Test
     public void searchTest() {
-        homePage.openHomePage();
-        homePage.languageRuOrUa.get(0).click();
         homePage.inputSearchField(LAPTOP);
         homePage.submitSearch();
 

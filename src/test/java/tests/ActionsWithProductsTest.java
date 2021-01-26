@@ -23,8 +23,6 @@ public class ActionsWithProductsTest extends BaseTest {
 
     @Test
     public void productActionCartTest() {
-        homePage.openHomePage();
-        homePage.languageRuOrUa.get(0).click();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
         productsPage.visibilityOfCartButtons();
@@ -38,8 +36,6 @@ public class ActionsWithProductsTest extends BaseTest {
 
     @Test
     public void productKitActionCartTest() {
-        homePage.openHomePage();
-        homePage.languageRuOrUa.get(0).click();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
         productsPage.productName.get(0).click();
@@ -51,8 +47,6 @@ public class ActionsWithProductsTest extends BaseTest {
 
     @Test
     public void productActionDeleteFromCartTest() {
-        homePage.openHomePage();
-        homePage.languageRuOrUa.get(0).click();
         homePage.navigateToCategoriesFromMainPage();
         homePage.navigateToLaptopCategory();
         productsPage.fluentVisibilityOfCartButtons();
@@ -66,8 +60,6 @@ public class ActionsWithProductsTest extends BaseTest {
 
     @Test
     public void productActionWishListTest() {
-        homePage.openHomePage();
-        homePage.languageRuOrUa.get(0).click();
         loginPage.enterToAccountClick();
         loginPage.inputLoginField(INPUT_FOR_LOGIN);
         loginPage.inputPasswordField(INPUT_FOR_PASSWORD);
@@ -94,8 +86,6 @@ public class ActionsWithProductsTest extends BaseTest {
 
     @Test
     public void wishListNewOwnListCreationTest() {
-        homePage.openHomePage();
-        homePage.languageRuOrUa.get(0).click();
         loginPage.enterToAccountClick();
         loginPage.inputLoginField(INPUT_FOR_LOGIN);
         loginPage.inputPasswordField(INPUT_FOR_PASSWORD);
@@ -126,8 +116,6 @@ public class ActionsWithProductsTest extends BaseTest {
 
     @Test
     public void outOfStackProductTest() {
-        homePage.openHomePage();
-        homePage.languageRuOrUa.get(0).click();
         loginPage.enterToAccountClick();
         loginPage.inputLoginField(INPUT_FOR_LOGIN);
         loginPage.inputPasswordField(INPUT_FOR_PASSWORD);
@@ -151,8 +139,6 @@ public class ActionsWithProductsTest extends BaseTest {
 
     @Test
     public void comparisonOfProductsTest() {
-        homePage.openHomePage();
-        homePage.languageRuOrUa.get(0).click();
         homePage.navigateToCategoriesFromMainPage();
         homePage.laptopsTextIsPresent();
         homePage.navigateToLaptopCategory();
