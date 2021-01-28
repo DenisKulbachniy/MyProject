@@ -15,7 +15,7 @@ public class Waiter {
     private final FluentWait<WebDriver> fluentWait;
 
     public Waiter(WebDriver driver) {
-        webDriverWait = new WebDriverWait(driver, 10);
+        webDriverWait = new WebDriverWait(driver, 15);
         fluentWait = initFluentWait(driver);
     }
 
@@ -44,6 +44,13 @@ public class Waiter {
 
     public void waitFluent(List<WebElement> elements) {
         fluentWait.until(ExpectedConditions.visibilityOfAllElements(elements));
+    }
+    public void waitFluent11(WebElement elements) {
+        fluentWait.until(ExpectedConditions.visibilityOf(elements));
+    }
+
+    public void waitFluentForElement(WebElement element) {
+        fluentWait.until(ExpectedConditions.visibilityOfAllElements(element));
     }
 }
 
