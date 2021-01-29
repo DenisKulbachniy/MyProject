@@ -12,6 +12,10 @@ public class HomePageSteps extends BaseSteps {
         wait = new Waiter(driver);
         PageFactory.initElements(driver, this);
     }
+    public void openHomePageAndSwitchLanguage(){
+        homePage.openHomePage();
+        homePage.languageRuOrUa.get(0).click();
+    }
 
     public void navigateToLaptopCategory() {
         wait.untilVisible(homePage.productsCatalogue).click();
@@ -52,10 +56,10 @@ public class HomePageSteps extends BaseSteps {
         wait.untilVisible(homePage.listOfCities).click();
         wait.untilVisible(homePage.acceptButtonToChooseCity).click();
     }
-    public void fillInSearchFieldAndSubmit(String key) {
+    public void fillInSearchFieldAndSubmit(String inputText) {
         wait.untilVisible(homePage.searchField).click();
-        wait.untilVisible(homePage.searchField).sendKeys(key);
-        wait.untilVisible(homePage.searchField).submit();
+        wait.untilVisible(homePage.searchField).sendKeys(inputText);
+        wait.untilVisible(homePage.searchButton).click();
     }
     public String getChooseCityText() {
         wait.untilVisible(homePage.chooseCity);

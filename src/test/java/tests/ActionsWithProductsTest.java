@@ -2,7 +2,6 @@ package tests;
 
 import constants.Constants;
 import org.junit.Test;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 public class ActionsWithProductsTest extends BaseTest {
@@ -13,7 +12,7 @@ public class ActionsWithProductsTest extends BaseTest {
         productsPageSteps.addProductInCart();
         homePageSteps.navigateToProductCart();
 
-        Assert.assertEquals(productsPage.productInCartFindAll.getText(), productsPageSteps.getProductNameInCart());
+        Assert.assertTrue(productsPageSteps.getProductNameInCartText().contains(Constants.LAPTOP));
         Assert.assertTrue(productsPageSteps.isProductNameInCartEnabled());
         Assert.assertTrue(productsPageSteps.isProductNameInCartDisplayed());
     }
@@ -93,8 +92,6 @@ public class ActionsWithProductsTest extends BaseTest {
         productsPageSteps.comparisonButtonsOfTwoProducts();
         homePageSteps.productsComparison();
 
-        for (WebElement element : productsPage.allProductsNotFirstOnly) {
-            Assert.assertTrue(element.getText().contains(Constants.LAPTOP));
-        }
+        Assert.assertTrue(productsPageSteps.getHeaderProductsText().contains(Constants.COMPARING_LAPTOPS));
     }
 }

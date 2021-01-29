@@ -102,7 +102,7 @@ public class ProductsPageSteps extends BaseSteps {
         return productsPage.kitInCart.getText();
     }
 
-    public String getProductNameInCart() {
+    public String getProductNameInCartText() {
         wait.untilVisible(productsPage.productInCart);
         return productsPage.productInCart.getText();
     }
@@ -120,6 +120,11 @@ public class ProductsPageSteps extends BaseSteps {
     public String getEmptyCartText() {
         wait.untilVisible(productsPage.emptyCart);
         return productsPage.emptyCart.getText();
+    }
+
+    public String getHeaderProductsText() {
+        wait.untilVisible(productsPage.headerNameOfInput);
+        return productsPage.headerNameOfInput.getText();
     }
 }
 

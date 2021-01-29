@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -10,20 +9,11 @@ import java.util.List;
 
 public class ProductsPage extends BasePage {
 
-    @FindAll({
-            @FindBy(xpath = ".//button[contains(text(),'Ноутбук')]"),
-            @FindBy(xpath = ".//span[contains(@class,'tile__title')]")
-    })
-    public WebElement productInCartFindAll;
-
     @FindBy(xpath = ".//button[contains(@class, 'buy-button')]")
     public List<WebElement> cartButton;
 
     @FindBy(xpath = ".//div[contains(@class, 'product__main')]")
     public WebElement productInCart;
-
-    @FindBy(xpath = ".//span[contains(@class, 'tile__title')]")
-    public List<WebElement> allProductsNotFirstOnly;
 
     @FindBy(xpath = ".//span[contains(text(),'PlayStation 5')]")
     public List<WebElement> playStationProductChoice;
@@ -63,6 +53,9 @@ public class ProductsPage extends BasePage {
 
     @FindBy(xpath = ".//button[contains(@class, 'delete-wishlist')]")
     public WebElement deleteWishList;
+
+    @FindBy(xpath = ".//h1[contains(@class,'heading')]")
+    public WebElement headerNameOfInput;
 
     public ProductsPage(WebDriver driver) {
         super(driver);

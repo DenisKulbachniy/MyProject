@@ -12,10 +12,10 @@ public class PersonnelAccountSteps extends BaseSteps{
         wait = new Waiter(driver);
         PageFactory.initElements(driver, this);
     }
-    public void createNewWishList(String key){
+    public void createNewWishList(String wishListName){
         wait.untilVisible(personnelAccountPage.accountWishList).click();
         wait.untilVisible(personnelAccountPage.createNewWishList).click();
-        wait.untilVisible(personnelAccountPage.myListOfWishes).sendKeys(key);
+        wait.untilVisible(personnelAccountPage.myListOfWishes).sendKeys(wishListName);
         wait.untilVisible(personnelAccountPage.addNewListOfWishes).click();
     }
     public void deleteWishList(){

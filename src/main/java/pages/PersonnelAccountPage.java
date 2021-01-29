@@ -6,8 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import waiters.Waiter;
 
-import java.util.List;
-
 public class PersonnelAccountPage extends BasePage{
     Waiter wait;
 
@@ -24,9 +22,6 @@ public class PersonnelAccountPage extends BasePage{
 
     @FindBy(xpath = ".//h3[contains(@class,'wish')]")
     public WebElement nameOfCreatedWishList;
-
-    @FindBy(xpath = ".//p[contains(@class, 'personal') and contains(text(),'mail.com')]")
-    public List<WebElement> personnelData;
 
     @FindBy(xpath = ".//h3[contains(text(),'У вас еще нет списков желаний')]")
     public WebElement emptyWishList;

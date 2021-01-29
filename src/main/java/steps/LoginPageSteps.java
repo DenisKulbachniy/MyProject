@@ -12,10 +12,14 @@ public class LoginPageSteps extends BaseSteps{
         wait = new Waiter(driver);
         PageFactory.initElements(driver, this);
     }
-    public void login(String key, String key2){
+    public void login(String login, String password){
         wait.untilVisible(loginPage.enterToAccountLink).click();
-        wait.untilVisible(loginPage.loginField).sendKeys(key);
-        wait.untilVisible(loginPage.passwordField).sendKeys(key2);
+        wait.untilVisible(loginPage.loginField).sendKeys(login);
+        wait.untilVisible(loginPage.passwordField).sendKeys(password);
         wait.untilVisible(loginPage.enterButton).click();
+    }
+    public String  getUserText(){
+        wait.untilVisible(loginPage.userLink);
+        return loginPage.userLink.getText();
     }
 }

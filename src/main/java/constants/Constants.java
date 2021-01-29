@@ -11,10 +11,10 @@ public class Constants {
     public static final String EMPTY_WISH_LIST = "У вас еще нет списков желаний";
     public static final String BASEURI = "https://rozetka.com.ua/";
     public static final String KIEV = "Киев";
-    public static final String FIND = "Найти";
+    public static final String COMPARING_LAPTOPS = "Сравниваем ноутбуки";
+    public static final String USER_NAME = "Артем Петров";
 
-    public Constants(){
+    public Constants() {
 
     }
-
 }

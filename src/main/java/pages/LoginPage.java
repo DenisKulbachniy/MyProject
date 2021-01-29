@@ -16,8 +16,8 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = ".//button[contains(@class, 'user-link')]")
     public WebElement enterToAccountLink;
 
-    @FindBy(xpath = ".//a[@class='header-topline__user-link']")
-    public WebElement enterToEnteredAccount;
+    @FindBy(xpath = "//a[contains(@class,'user-link')]")
+    public WebElement userLink;
 
     @FindBy(xpath = ".//button[contains(text(),'Войти')]")
     public WebElement enterButton;

@@ -3,7 +3,6 @@ package tests;
 import constants.Constants;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.WebElement;
 
 public class SearchTest extends BaseTest {
 
@@ -11,7 +10,6 @@ public class SearchTest extends BaseTest {
     public void searchTest() {
         homePageSteps.fillInSearchFieldAndSubmit(Constants.LAPTOP);
 
-        for (WebElement element : productsPage.allProductsNotFirstOnly)
-            Assert.assertTrue(element.getText().contains(Constants.LAPTOP));
+        Assert.assertEquals(productsPageSteps.getHeaderProductsText(),Constants.LAPTOPS);
     }
 }

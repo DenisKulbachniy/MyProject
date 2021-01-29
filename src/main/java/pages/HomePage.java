@@ -50,6 +50,9 @@ public class HomePage extends BasePage {
     @FindBy(xpath = ".//input[contains(@class, 'search-form')]")
     public WebElement searchField;
 
+    @FindBy(xpath = ".//button[contains(@class,'submit')]")
+    public WebElement searchButton;
+
     public HomePage(WebDriver driver) {
         super(driver);
         wait = new Waiter(driver);
