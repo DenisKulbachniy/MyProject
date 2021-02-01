@@ -1,37 +1,15 @@
 package tests;
 
-import org.junit.Assert;
+import constants.Constants;
 import org.junit.Test;
-import org.openqa.selenium.WebElement;
-import pages.HomePage;
-import pages.LoginPage;
+import org.testng.Assert;
 
 public class LogInTest extends BaseTest {
 
-    private static final String INPUT_FOR_LOGIN = "petrovartem01061996@gmail.com";
-    private static final String INPUT_FOR_PASSWORD = "01061996Artem";
-    public static final int WIDTH = 322;
-    HomePage homePage = new HomePage(driver);
-    LoginPage loginPage = new LoginPage(driver);
-
     @Test
     public void logInToAcc() {
-        homePage.openHomePage();
-        homePage.languageRuOrUa.get(0).click();
+        loginPageSteps.login(Constants.INPUT_FOR_LOGIN, Constants.INPUT_FOR_PASSWORD);
 
-        loginPage.enterToAccountClick();
-        loginPage.inputLoginField(INPUT_FOR_LOGIN);
-        loginPage.inputPasswordField(INPUT_FOR_PASSWORD);
-        loginPage.getEnterButtonSize();
-
-        Assert.assertEquals(loginPage.getEnterButtonSize().getWidth(), WIDTH);
-
-        loginPage.enterButtonToBeClickable();
-        loginPage.enterButtonClick();
-        loginPage.enterToEnteredAccClick();
-        loginPage.enterToEnteredAccClick();
-
-        for (WebElement element : loginPage.personnelData)
-            Assert.assertEquals(element.getText(), (INPUT_FOR_LOGIN));
+        Assert.assertEquals(loginPageSteps.getUserText(), Constants.USER_NAME);
     }
 }
