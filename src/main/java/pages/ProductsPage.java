@@ -27,7 +27,7 @@ public class ProductsPage extends BasePage {
     @FindBy(xpath = ".//button[contains(@class, 'wish')]")
     public List<WebElement> wishButton;
 
-    @FindBy(xpath = ".//span[contains(@class,'tile__title')]")
+    @FindBy(xpath = ".//a[contains(@class,'goods-tile__heading')]")
     public List<WebElement> productName;
 
     @FindBy(xpath = ".//button[@class='compare-button']")
