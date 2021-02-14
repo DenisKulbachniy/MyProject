@@ -2,6 +2,7 @@ package steps;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import pages.HomePage;
 import waiters.Waiter;
 
 public class HomePageSteps extends BaseSteps {
@@ -14,7 +15,7 @@ public class HomePageSteps extends BaseSteps {
     }
     public void openHomePageAndSwitchLanguage(){
         homePage.openHomePage();
-        homePage.languageRuOrUa.get(0).click();
+        homePage.languageRuOrUa.click();
     }
 
     public void navigateToLaptopCategory() {
@@ -52,9 +53,21 @@ public class HomePageSteps extends BaseSteps {
     }
 
     public void changeCity() {
-        wait.untilVisible(homePage.chooseCity).click();
-        wait.untilVisible(homePage.listOfCities).click();
-        wait.untilVisible(homePage.acceptButtonToChooseCity).click();
+        homePage = new HomePage(driver);
+        wait = new Waiter(driver);
+        wait.untilVisible(homePage.homePageAddMenu).click();
+        wait.untilVisible(homePage.addCityMenu).click();
+        wait.visibilityOfAllElementsForListOfWebElements(homePage.listOfCities);
+        int attempt = 0;
+        while (attempt < 1) {
+            try {
+                homePage.listOfCities.get(0).click();
+            } catch (Exception e) {
+                attempt++;
+            }
+            wait.untilVisible(homePage.acceptButtonToChooseCity).click();
+            wait.untilVisible(homePage.homePageAddMenu).click();
+        }
     }
     public void fillInSearchFieldAndSubmit(String inputText) {
         wait.untilVisible(homePage.searchField).click();

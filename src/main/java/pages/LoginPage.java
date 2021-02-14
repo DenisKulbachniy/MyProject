@@ -13,13 +13,13 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = ".//input[@id='auth_pass']")
     public WebElement passwordField;
 
-    @FindBy(xpath = ".//button[contains(@class, 'user-link')]")
+    @FindBy(xpath = ".//rz-user/button[contains(@class, 'header__button')]")
     public WebElement enterToAccountLink;
 
-    @FindBy(xpath = "//a[contains(@class,'user-link')]")
+    @FindBy(xpath = ".//p[contains(@class, 'user-name')]")
     public WebElement userLink;
 
-    @FindBy(xpath = ".//button[contains(text(),'Войти')]")
+    @FindBy(xpath = ".//button[contains(@class,'auth-modal__submit')]")
     public WebElement enterButton;
 
     public LoginPage(WebDriver driver) {
