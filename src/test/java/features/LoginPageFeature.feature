@@ -6,6 +6,6 @@ Feature: Login to account
     Then user can see his name in account
     Examples:
       | login                         | password      |
-      | Petrovartem01061996@gmail.com | 01061996Artem |
+      | petrovartem01061996@gmail.com | 01061996Artem |
 
 

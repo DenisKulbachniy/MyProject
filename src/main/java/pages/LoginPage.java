@@ -19,7 +19,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = ".//p[contains(@class, 'user-name')]")
     public WebElement userLink;
 
-    @FindBy(xpath = ".//button[contains(text(),'Войти')]")
+    @FindBy(xpath = ".//button[contains(@class,'auth-modal__submit')]")
     public WebElement enterButton;
 
     public LoginPage(WebDriver driver) {

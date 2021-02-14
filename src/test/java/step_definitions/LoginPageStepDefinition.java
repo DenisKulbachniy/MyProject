@@ -36,7 +36,8 @@ public class LoginPageStepDefinition {
     public void login(String login, String password) {
         wait = new Waiter(baseStepDefinition.driver);
         loginPage = new LoginPage(baseStepDefinition.driver);
-        wait.untilVisible(loginPage.enterToAccountLink).click();
+        wait.untilVisible(loginPage.enterToAccountLink);
+        loginPage.enterToAccountLink.click();
         wait.untilVisible(loginPage.loginField).sendKeys(login);
         wait.untilVisible(loginPage.passwordField).sendKeys(password);
         wait.untilVisible(loginPage.enterButton).click();
@@ -49,6 +50,8 @@ public class LoginPageStepDefinition {
     }
 
     public String getUserText() {
+        wait = new Waiter(baseStepDefinition.driver);
+        loginPage = new LoginPage(baseStepDefinition.driver);
         wait.untilVisible(loginPage.userLink);
         return loginPage.userLink.getText();
     }
