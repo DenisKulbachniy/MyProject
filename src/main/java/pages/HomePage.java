@@ -11,16 +11,16 @@ import java.util.List;
 public class HomePage extends BasePage {
     Waiter wait;
 
-    @FindBy(xpath = ".//li[contains(@class, 'language')]")
-    public List<WebElement> languageRuOrUa;
+    @FindBy(xpath = ".//li[contains(@class, 'lang')]")
+    public WebElement languageRuOrUa;
 
-    @FindBy(xpath = ".//span[starts-with(@class, 'menu-toggler')]")
+    @FindBy(xpath = ".//button[@id = 'fat-menu']")
     public WebElement productsCatalogue;
 
     @FindBy(xpath = ".//a[contains(@class, 'hidden') and contains(text(), 'Ноутбуки')]")
     public WebElement laptopCategory;
 
-    @FindBy(xpath = ".//a[contains(@class, 'basket')]")
+    @FindBy(xpath = ".//rz-cart/button[contains(@class, 'header')]")
     public WebElement headerCartButton;
 
     @FindBy(xpath = ".//a[contains(@class,'hidden') and contains(text(), 'Товары для геймеров')]")
@@ -29,10 +29,10 @@ public class HomePage extends BasePage {
     @FindBy(xpath = ".//span[contains(@class, 'popular') and contains(text(),'PlayStation')]")
     public WebElement playstationStoreCategory;
 
-    @FindBy(xpath = ".//a[contains(@class, 'wish header')]")
+    @FindBy(xpath = ".//rz-wishlist/a[@class='header__button']")
     public WebElement activeHeaderWishListButton;
 
-    @FindBy(xpath = ".//button[contains(@class, 'compare header')]")
+    @FindBy(xpath = ".//rz-comparison/button[@class='header__button']")
     public WebElement activeHeaderComparisonButton;
 
     @FindBy(xpath = ".//ul[contains(@class, 'comparison')]")
@@ -42,7 +42,7 @@ public class HomePage extends BasePage {
     public WebElement chooseCity;
 
     @FindBy(xpath = ".//a[@class='header-location__popular-link']")
-    public WebElement listOfCities;
+    public List<WebElement> listOfCities;
 
     @FindBy(xpath = ".//button[contains(text(), 'Применить')]")
     public WebElement acceptButtonToChooseCity;
@@ -52,6 +52,12 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = ".//button[contains(@class,'submit')]")
     public WebElement searchButton;
+
+    @FindBy(xpath = ".//rz-mobile-user-menu/button[@class = 'header__button']")
+    public WebElement homePageAddMenu;
+
+    @FindBy(xpath = ".//button[contains(@class, 'city')]")
+    public WebElement addCityMenu;
 
     public HomePage(WebDriver driver) {
         super(driver);
