@@ -5,7 +5,6 @@ public class Constants {
     public static final String INPUT_FOR_PASSWORD = "01061996Artem";
     public static final String LAPTOP = "Ноутбук";
     public static final String LAPTOPS = "Ноутбуки";
-    public static final String MY_LAPTOPS = "My Laptops";
     public static final String TOGETHER_CHEAP = "Вместе дешевле";
     public static final String CART_IS_EMPTY = "Корзина пуста";
     public static final String PLAYSTATION = "PlayStation";
@@ -15,7 +14,4 @@ public class Constants {
     public static final String COMPARING_LAPTOPS = "Сравниваем ноутбуки";
     public static final String USER_NAME = "Артем Петров";
 
-    public Constants() {
-
-    }
 }

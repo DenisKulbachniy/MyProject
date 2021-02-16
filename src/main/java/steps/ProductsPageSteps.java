@@ -31,8 +31,8 @@ public class ProductsPageSteps extends BaseSteps {
         int attempt = 0;
         while (attempt < 5) {
             try {
-                wait.visibilityOfAllElementsForListOfWebElements(productsPage.cartButton);
-                productsPage.cartButton.get(0).click();
+                wait.visibilityOfAllElementsForListOfWebElements(productsPage.cartButtons);
+                productsPage.cartButtons.get(0).click();
                 break;
             } catch (StaleElementReferenceException e) {
             }

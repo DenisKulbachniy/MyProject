@@ -1,9 +1,10 @@
 package step_definitions;
 
-import constants.Constants;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import pages.HomePage;
 import pages.ProductsPage;
@@ -11,126 +12,66 @@ import waiters.Waiter;
 
 public class ProductsPageStepDefinition {
 
-    private final BaseStepDefinition baseStepDefinition;
+    BaseStepDefinition baseStepDefinition;
     Waiter wait;
     HomePage homePage;
     ProductsPage productsPage;
 
     public ProductsPageStepDefinition(BaseStepDefinition baseStepDefinition) {
         this.baseStepDefinition = baseStepDefinition;
-    }
-
-    @And("user clicks on product")
-    public void productNameAction() {
-        wait = new Waiter(baseStepDefinition.driver);
-        productsPage = new ProductsPage(baseStepDefinition.driver);
-        int attempt = 0;
-        while (attempt < 5) {
-            try {
-                wait.visibilityOfAllElementsForListOfWebElements(productsPage.productName);
-                productsPage.productName.get(0).click();
-                break;
-            } catch (StaleElementReferenceException e) {
-            }
-            attempt++;
-        }
-    }
-
-    @And("user adds product in cart")
-    public void addProductInCart() {
-        wait = new Waiter(baseStepDefinition.driver);
-        productsPage = new ProductsPage(baseStepDefinition.driver);
-        int attempt = 0;
-        while (attempt < 5) {
-            try {
-                wait.visibilityOfAllElementsForListOfWebElements(productsPage.cartButton);
-                productsPage.cartButton.get(0).click();
-                break;
-            } catch (StaleElementReferenceException e) {
-            }
-            attempt++;
-        }
-    }
-
-    @Then("user can see product in cart")
-    public void checkProductInCart() {
-        productsPage = new ProductsPage(baseStepDefinition.driver);
-        Assert.assertTrue(getProductNameInCartText().contains(Constants.LAPTOP));
-    }
-
-    @And("user adds product in wish list")
-    public void addProductInWishList() {
-        productsPage = new ProductsPage(baseStepDefinition.driver);
-        wait = new Waiter(baseStepDefinition.driver);
-        int attempt = 0;
-        while (attempt < 5) {
-            try {
-                wait.visibilityOfAllElementsForListOfWebElements(productsPage.wishButton);
-                productsPage.wishButton.get(0).click();
-                break;
-            } catch (StaleElementReferenceException e) {
-            }
-            attempt++;
-        }
-    }
-
-    @And("user chooses out of stock product")
-    public void choosePlayStationProduct() {
         wait = new Waiter(baseStepDefinition.driver);
         homePage = new HomePage(baseStepDefinition.driver);
         productsPage = new ProductsPage(baseStepDefinition.driver);
-        int attempt = 0;
-        while (attempt < 1) {
-            try {
-                wait.untilVisible(homePage.playstationStoreCategory).click();
-                wait.untilVisible(productsPage.playStationProductChoice.get(0)).click();
-                wait.untilVisible(productsPage.productTitle).click();
-            } catch (StaleElementReferenceException e) {
+    }
+
+    @When("user clicks on {string}")
+    public void userClicksOnProductName(String productName) {
+        wait.visibilityOfAllElementsForListOfWebElements(productsPage.productName);
+        for (WebElement element : productsPage.productName) {
+            if (element.getText().contains(productName)) {
+                element.click();
+                break;
             }
-            attempt++;
         }
     }
 
-    @And("user adds product with kit in cart")
-    public void buyKit() {
-        wait = new Waiter(baseStepDefinition.driver);
-        productsPage = new ProductsPage(baseStepDefinition.driver);
+    @When("user adds {string} in cart")
+    public void userAddsProductInCart(String productName) {
+        wait.visibilityOfAllElementsForListOfWebElements(productsPage.productName);
+        for (WebElement element : productsPage.productName) {
+            if (element.getText().contains(productName)) {
+                element.click();
+                break;
+            }
+        }
+        wait.untilVisible(productsPage.productTitle).click();
+        productsPage.cartButton.click();
+    }
+
+    @Then("user can see {string} in cart")
+    public void userCanSeeProductInCart(String productInCart) {
+        Assert.assertTrue(getProductNameInCartText().contains(productInCart));
+    }
+
+    @When("user adds product with kit in cart")
+    public void userAddsProductWithKitInCart() {
         wait.untilVisible(productsPage.buyKit).click();
     }
 
-    public void productTitleActions() {
-        wait.untilVisible(productsPage.productTitle).click();
-    }
-
-    public String getProductNameText() {
-        wait = new Waiter(baseStepDefinition.driver);
-        productsPage = new ProductsPage(baseStepDefinition.driver);
+    @When("user adds {string} in order to compare")
+    public void userAddsProductsInOrderToCompare(String productName) {
         wait.visibilityOfAllElementsForListOfWebElements(productsPage.productName);
-        return productsPage.productName.get(0).getText();
-    }
-
-    @And("user wants to notify himself about in stock of product")
-    public void notifyAboutAppearingOfProductButtonClick() {
-        wait = new Waiter(baseStepDefinition.driver);
-        productsPage = new ProductsPage(baseStepDefinition.driver);
-        wait.untilVisible(productsPage.notifyAboutAppearingOfProductButton).click();
-    }
-
-    @And("user adds a few products in order to compare")
-    public void comparisonButtonsOfTwoProducts() {
-        wait = new Waiter(baseStepDefinition.driver);
-        productsPage = new ProductsPage(baseStepDefinition.driver);
-        int attempt = 0;
-        while (attempt < 5) {
-            try {
-                wait.visibilityOfAllElementsForListOfWebElements(productsPage.comparisonOfProductsButtons);
-                productsPage.comparisonOfProductsButtons.get(0).click();
-                wait.visibilityOfAllElementsForListOfWebElements(productsPage.comparisonOfProductsButtons);
-                productsPage.comparisonOfProductsButtons.get(1).click();
-            } catch (Exception e) {
+        for (WebElement element : productsPage.productName) {
+            if (element.getText().contains(productName)) {
+                element.click();
+                break;
             }
-            attempt++;
         }
+        wait.untilVisible(productsPage.productTitle);
+        productsPage.productTitle.click();
+        wait.untilVisible(productsPage.comparisonOfProductsButton);
+        productsPage.productTitle.click();
+        productsPage.comparisonOfProductsButton.click();
     }
 
     public String getKitInCartText() {
@@ -139,20 +80,8 @@ public class ProductsPageStepDefinition {
     }
 
     public String getProductNameInCartText() {
-        wait = new Waiter(baseStepDefinition.driver);
-        productsPage = new ProductsPage(baseStepDefinition.driver);
         wait.untilVisible(productsPage.productInCart);
         return productsPage.productInCart.getText();
-    }
-
-    public Boolean isProductNameInCartEnabled() {
-        wait.untilVisible(productsPage.productInCart);
-        return productsPage.productInCart.isEnabled();
-    }
-
-    public Boolean isProductNameInCartDisplayed() {
-        wait.untilVisible(productsPage.productInCart);
-        return productsPage.productInCart.isDisplayed();
     }
 
     public String getEmptyCartText() {
@@ -165,29 +94,56 @@ public class ProductsPageStepDefinition {
         return productsPage.headerNameOfInput.getText();
     }
 
-    @Then("user can see his product with kit in cart")
-    public void checkProductKitInCart() {
-        productsPage = new ProductsPage(baseStepDefinition.driver);
-        Assert.assertTrue(getKitInCartText().contains(Constants.TOGETHER_CHEAP));
+    public String getColorProductText() {
+        wait.untilVisible(productsPage.colorText);
+        return productsPage.colorText.getText();
     }
 
-    @Then("user can see that cart is empty")
-    public void checkEmptyCart() {
-        Assert.assertTrue(getEmptyCartText().contains(Constants.CART_IS_EMPTY));
+    @Then("user can see added product with {string} in cart")
+    public void userCanSeeAddedProductWithKitInCart(String kitInCart) {
+        Assert.assertTrue(getKitInCartText().contains(kitInCart));
     }
 
-    @Then("user can see product in wish list")
-    public void checkWishList() {
-        Assert.assertTrue(getProductNameText().contains(Constants.LAPTOP));
+    @Then("user can see that {string}")
+    public void userCanSeeEmptyCart(String emptyCart) {
+        try {
+            wait.untilVisible(productsPage.emptyCart);
+            wait.untilVisible(productsPage.emptyCart).click();
+            Assert.assertTrue(getEmptyCartText().contains(emptyCart));
+        } catch (StaleElementReferenceException e) {
+        }
     }
 
-    @Then("user can see out of stock product")
-    public void checkOutOfStockProduct() {
-        Assert.assertTrue(getProductNameText().contains(Constants.PLAYSTATION));
+    @Then("user can see {string}")
+    public void userCanSeeComparisonProducts(String comparison) {
+        Assert.assertTrue(getHeaderProductsText().contains(comparison));
     }
 
-    @Then("user can see comparison products")
-    public void checkComparisonProducts() {
-        Assert.assertTrue(getHeaderProductsText().contains(Constants.COMPARING_LAPTOPS));
+    @When("user switches color of product")
+    public void userSwitchesColorOfProduct() {
+        wait.untilVisible(productsPage.laptopColor).click();
+    }
+
+    @Then("user can see that product color is {string}")
+    public void userCanSeeProductColor(String color) {
+        try {
+            Assert.assertTrue(getColorProductText().contains(color));
+        } catch (StaleElementReferenceException e) {
+        }
+    }
+
+    @When("user chooses laptops by brand {string}")
+    public void userChoosesLaptopsByBrand(String brandName) {
+        wait.visibilityOfAllElementsForListOfWebElements(productsPage.productName);
+        baseStepDefinition.driver.findElement(By.xpath(String.format(productsPage.filterByCompany, brandName))).click();
+    }
+
+    @Then("user can see filtered laptops by brand {string}")
+    public void userCanSeeFilteredLaptopsByBrand(String brandName) {
+        try {
+            for (WebElement element : productsPage.productName)
+                Assert.assertTrue(element.getText().contains(brandName));
+        } catch (StaleElementReferenceException e) {
+        }
     }
 }

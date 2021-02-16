@@ -10,7 +10,10 @@ import java.util.List;
 public class ProductsPage extends BasePage {
 
     @FindBy(xpath = ".//button[contains(@class, 'buy-button')]")
-    public List<WebElement> cartButton;
+    public List<WebElement> cartButtons;
+
+    @FindBy(xpath = ".//button[contains(@class, 'buy-button')]")
+    public WebElement cartButton;
 
     @FindBy(xpath = ".//div[contains(@class, 'product__main')]")
     public WebElement productInCart;
@@ -32,6 +35,9 @@ public class ProductsPage extends BasePage {
 
     @FindBy(xpath = ".//button[@class='compare-button']")
     public List<WebElement> comparisonOfProductsButtons;
+
+    @FindBy(xpath = ".//button[@class='compare-button']")
+    public WebElement comparisonOfProductsButton;
 
     @FindBy(xpath = ".//button[contains(@class, 'context-menu')]")
     public WebElement contextCartMenu;
@@ -56,6 +62,14 @@ public class ProductsPage extends BasePage {
 
     @FindBy(xpath = ".//h1[contains(@class,'heading')]")
     public WebElement headerNameOfInput;
+
+    @FindBy(xpath = ".//a[@class='var-options__color']")
+    public WebElement laptopColor;
+
+    @FindBy(xpath = ".//p[@class='var-options__label']")
+    public WebElement colorText;
+
+    public String filterByCompany = ".//label[@for = '%s']";
 
     public ProductsPage(WebDriver driver) {
         super(driver);

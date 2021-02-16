@@ -1,57 +1,54 @@
 Feature: Product actions
 
   Scenario: User adds product in cart
-    Given user is on home page
+    Given user is on home page and switches language
     When user navigates to laptop category
-    And user adds product in cart
-    And user navigates to product cart
-    Then user can see product in cart
+    When user adds "Ноутбук Acer Aspire 5 A515-55G" in cart
+    When user navigates to product cart
+    Then user can see "Ноутбук Acer Aspire 5 A515-55G" in cart
 
   Scenario: User adds kit product in cart
-    Given user is on home page
+    Given user is on home page and switches language
     When user navigates to laptop category
-    And user clicks on product
-    And user adds product with kit in cart
-    Then user can see his product with kit in cart
+    When user clicks on "Ноутбук Acer Aspire 5 A515-55G"
+    When user adds product with kit in cart
+    Then user can see added product with "Вместе дешевле" in cart
 
   Scenario: User can delete product from cart
-    Given user is on home page
+    Given user is on home page and switches language
     When user navigates to laptop category
-    And user adds product in cart
-    And user navigates to product cart
-    And user removes product from cart
-    Then user can see that cart is empty
-
-  Scenario Outline: User can add and delete product from wish list
-    Given user is on home page
-    When user enters '<login>' and '<password>' field
-    When user navigates to laptop category
-    And user adds product in wish list
-    And user navigates on header wish list
-    And user removes product from wish list
-    Then user can see that wish list is empty
-    Examples:
-      | login                         | password      |
-      | Petrovartem01061996@gmail.com | 01061996Artem |
-
-  Scenario Outline:User can get in stock status
-    Given user is on home page
-    When user enters '<login>' and '<password>' field
-    And user navigate to playstation category
-    And user chooses out of stock product
-    And user wants to notify himself about in stock of product
-    And user navigates on header wish list
-    Then user can see out of stock product
-    When user removes product from wish list
-    Then user can see that wish list is empty
-
-    Examples:
-      | login                         | password      |
-      | Petrovartem01061996@gmail.com | 01061996Artem |
+    When user adds "Ноутбук Acer Aspire 5 A515-55G" in cart
+    When user navigates to product cart
+    When user removes product from cart
+    Then user can see that "Корзина пуста"
 
   Scenario: user can compare a few products
-    Given user is on home page
+    Given user is on home page and switches language
     When user navigates to laptop category
-    And user adds a few products in order to compare
-    And user navigates to compare products
-    Then user can see comparison products
+    When user adds "Ноутбук Acer Aspire 5 A515-55G" in order to compare
+    When user navigates to laptop category
+    When user adds "Ноутбук HP Pavilion Gaming 15-ec1007ua" in order to compare
+    When user navigates to compare products
+    Then user can see "Сравниваем ноутбуки"
+
+  Scenario: user removes product kit from cart
+    Given user is on home page and switches language
+    When user navigates to laptop category
+    When user clicks on "Ноутбук Acer Aspire 5 A515-55G"
+    When user adds product with kit in cart
+    Then user can see added product with "Вместе дешевле" in cart
+    When user removes product from cart
+    Then user can see that "Корзина пуста"
+
+  Scenario: user is able to change color of product
+    Given user is on home page and switches language
+    When user navigates to laptop category
+    When user clicks on "Ноутбук Acer Aspire 5 A515-55G"
+    When user switches color of product
+    Then user can see that product color is "Черный"
+
+  Scenario: user can filter laptops by brand
+    Given user is on home page and switches language
+    When user navigates to laptop category
+    When user chooses laptops by brand "Acer"
+    Then user can see filtered laptops by brand "Acer"

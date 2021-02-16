@@ -13,7 +13,6 @@ public class BaseStepDefinition {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-
     }
 
     @After

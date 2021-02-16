@@ -11,6 +11,7 @@ public class PersonnelAccountPage extends BasePage{
 
     @FindBy(xpath = ".//li[contains(@class,'main')]//following-sibling::a[contains(text(), 'Списки')]")
     public WebElement accountWishList;
+
     @FindBy(xpath = ".//button[contains(text(), 'Создать')]")
     public WebElement createNewWishList;
 

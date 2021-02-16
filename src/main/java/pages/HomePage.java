@@ -59,6 +59,11 @@ public class HomePage extends BasePage {
     @FindBy(xpath = ".//button[contains(@class, 'city')]")
     public WebElement addCityMenu;
 
+    @FindBy(xpath = "//div[@class='catalog-empty']")
+    public WebElement emptySearchResults;
+
+    public String cities = ".//a[text()= ' %s ']";
+
     public HomePage(WebDriver driver) {
         super(driver);
         wait = new Waiter(driver);
