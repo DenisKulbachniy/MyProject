@@ -13,5 +13,4 @@ public class Constants {
     public static final String KIEV = "Киев";
     public static final String COMPARING_LAPTOPS = "Сравниваем ноутбуки";
     public static final String USER_NAME = "Артем Петров";
-
 }

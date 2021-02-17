@@ -21,7 +21,6 @@ public class HomePageStepDefinition {
         wait = new Waiter(baseStepDefinition.driver);
         homePage = new HomePage(baseStepDefinition.driver);
         productsPage = new ProductsPage(baseStepDefinition.driver);
-
     }
 
     @Given("user is on home page and switches language")
@@ -33,21 +32,14 @@ public class HomePageStepDefinition {
 
     @When("user navigates to laptop category")
     public void userNavigatesToLaptopCategory() {
-        int attempt = 0;
-        while (attempt < 10) {
-            try {
-                wait.untilVisible(homePage.productsCatalogue);
-                homePage.productsCatalogue.click();
-                break;
-            } catch (StaleElementReferenceException e) {
-            }
-            attempt++;
-        }
+
+        wait.staleReferenceElementExceptionCatchWaitClick(homePage.productsCatalogue);
+        homePage.productsCatalogue.click();
         wait.untilVisible(homePage.laptopCategory).click();
     }
 
     @When("user navigates to product cart")
-    public void userNavigateToProductCart() {
+    public void userNavigatesToProductCart() {
         wait.untilVisible(homePage.headerCartButton).click();
     }
 
@@ -67,12 +59,15 @@ public class HomePageStepDefinition {
 
     @When("user wants to change city on {string}")
     public void userWantsToChangeCity(String cityName) {
-        wait.untilVisible(homePage.homePageAddMenu).click();
-        wait.untilVisible(homePage.addCityMenu).click();
-        wait.visibilityOfAllElementsForListOfWebElements(homePage.listOfCities);
-        baseStepDefinition.driver.findElement(By.xpath(String.format(homePage.cities, cityName))).click();
-        wait.untilVisible(homePage.acceptButtonToChooseCity).click();
-        wait.untilVisible(homePage.homePageAddMenu).click();
+        try {
+            wait.untilVisible(homePage.homePageAddMenu).click();
+            wait.untilVisible(homePage.addCityMenu).click();
+            wait.visibilityOfAllElementsForListOfWebElements(homePage.listOfCities);
+            baseStepDefinition.driver.findElement(By.xpath(String.format(homePage.cities, cityName))).click();
+            wait.untilVisible(homePage.acceptButtonToChooseCity).click();
+            wait.untilVisible(homePage.homePageAddMenu).click();
+        } catch (StaleElementReferenceException e) {
+        }
     }
 
     @When("user fills search field {string}")
@@ -86,7 +81,7 @@ public class HomePageStepDefinition {
     }
 
     public String getChooseCityText() {
-        wait.untilVisible(homePage.addCityMenu);
+        wait.staleReferenceElementExceptionCatchWaitClick(homePage.addCityMenu);
         return homePage.addCityMenu.getText();
     }
 
@@ -102,16 +97,16 @@ public class HomePageStepDefinition {
 
     @Then("user can see displayed {string}")
     public void userCanSeeDisplayedInputWord(String inputWord) {
-        Assert.assertEquals(getHeaderProductsText(), inputWord);
+        Assert.assertEquals("Values are not equals", getHeaderProductsText(), inputWord);
     }
 
     @Then("user can see chosen city {string}")
     public void userCanSeeChosenCity(String city) {
-        Assert.assertTrue(getChooseCityText().contains(city));
+        Assert.assertEquals("Values are not equals", getChooseCityText(), city);
     }
 
     @Then("user can see in search {string}")
     public void userCanSeeInSearch(String searchResult) {
-        Assert.assertTrue(getEmptySearchResultsText().contains(searchResult));
+        Assert.assertEquals("Values are not equals", getEmptySearchResultsText(), searchResult);
     }
 }

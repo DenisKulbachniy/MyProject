@@ -1,14 +1,17 @@
 package step_definitions;
 
+import clickers.Clickers;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import pages.HomePage;
 import pages.ProductsPage;
 import waiters.Waiter;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ProductsPageStepDefinition {
 
@@ -16,17 +19,19 @@ public class ProductsPageStepDefinition {
     Waiter wait;
     HomePage homePage;
     ProductsPage productsPage;
+    Clickers clickers;
 
     public ProductsPageStepDefinition(BaseStepDefinition baseStepDefinition) {
         this.baseStepDefinition = baseStepDefinition;
         wait = new Waiter(baseStepDefinition.driver);
+        clickers = new Clickers(baseStepDefinition.driver);
         homePage = new HomePage(baseStepDefinition.driver);
         productsPage = new ProductsPage(baseStepDefinition.driver);
     }
 
-    @When("user clicks on {string}")
+    @When("user clicks on product name {string}")
     public void userClicksOnProductName(String productName) {
-        wait.visibilityOfAllElementsForListOfWebElements(productsPage.productName);
+        wait.staleReferenceElementExceptionCatchForListWait(productsPage.productName);
         for (WebElement element : productsPage.productName) {
             if (element.getText().contains(productName)) {
                 element.click();
@@ -37,7 +42,7 @@ public class ProductsPageStepDefinition {
 
     @When("user adds {string} in cart")
     public void userAddsProductInCart(String productName) {
-        wait.visibilityOfAllElementsForListOfWebElements(productsPage.productName);
+        wait.staleReferenceElementExceptionCatchForListWait(productsPage.productName);
         for (WebElement element : productsPage.productName) {
             if (element.getText().contains(productName)) {
                 element.click();
@@ -45,12 +50,12 @@ public class ProductsPageStepDefinition {
             }
         }
         wait.untilVisible(productsPage.productTitle).click();
-        productsPage.cartButton.click();
+        wait.elementToBeClickableWait(productsPage.cartButton).click();
     }
 
     @Then("user can see {string} in cart")
     public void userCanSeeProductInCart(String productInCart) {
-        Assert.assertTrue(getProductNameInCartText().contains(productInCart));
+        assertEquals("Values are not equals", getProductNameInCartText(), productInCart);
     }
 
     @When("user adds product with kit in cart")
@@ -58,20 +63,16 @@ public class ProductsPageStepDefinition {
         wait.untilVisible(productsPage.buyKit).click();
     }
 
-    @When("user adds {string} in order to compare")
+    @When("user adds product {string} in order to compare")
     public void userAddsProductsInOrderToCompare(String productName) {
-        wait.visibilityOfAllElementsForListOfWebElements(productsPage.productName);
+        wait.staleReferenceElementExceptionCatchForListWait(productsPage.productName);
         for (WebElement element : productsPage.productName) {
             if (element.getText().contains(productName)) {
                 element.click();
                 break;
             }
         }
-        wait.untilVisible(productsPage.productTitle);
-        productsPage.productTitle.click();
-        wait.untilVisible(productsPage.comparisonOfProductsButton);
-        productsPage.productTitle.click();
-        productsPage.comparisonOfProductsButton.click();
+        clickers.clickButtonWithStaleReferenceElementException(productsPage.comparisonOfProductsButton);
     }
 
     public String getKitInCartText() {
@@ -101,7 +102,7 @@ public class ProductsPageStepDefinition {
 
     @Then("user can see added product with {string} in cart")
     public void userCanSeeAddedProductWithKitInCart(String kitInCart) {
-        Assert.assertTrue(getKitInCartText().contains(kitInCart));
+        assertTrue("Values are not equals", getKitInCartText().contains(kitInCart));
     }
 
     @Then("user can see that {string}")
@@ -109,14 +110,14 @@ public class ProductsPageStepDefinition {
         try {
             wait.untilVisible(productsPage.emptyCart);
             wait.untilVisible(productsPage.emptyCart).click();
-            Assert.assertTrue(getEmptyCartText().contains(emptyCart));
+            assertEquals("Values are not equals", getEmptyCartText(), emptyCart);
         } catch (StaleElementReferenceException e) {
         }
     }
 
     @Then("user can see {string}")
     public void userCanSeeComparisonProducts(String comparison) {
-        Assert.assertTrue(getHeaderProductsText().contains(comparison));
+        assertEquals("Values are not equals", getHeaderProductsText(), comparison);
     }
 
     @When("user switches color of product")
@@ -127,7 +128,7 @@ public class ProductsPageStepDefinition {
     @Then("user can see that product color is {string}")
     public void userCanSeeProductColor(String color) {
         try {
-            Assert.assertTrue(getColorProductText().contains(color));
+            assertTrue("Values are not equals", getColorProductText().contains(color));
         } catch (StaleElementReferenceException e) {
         }
     }
@@ -140,10 +141,7 @@ public class ProductsPageStepDefinition {
 
     @Then("user can see filtered laptops by brand {string}")
     public void userCanSeeFilteredLaptopsByBrand(String brandName) {
-        try {
-            for (WebElement element : productsPage.productName)
-                Assert.assertTrue(element.getText().contains(brandName));
-        } catch (StaleElementReferenceException e) {
-        }
+        for (WebElement element : productsPage.productName)
+            assertTrue("Not all elements are not contain brandName", element.getText().contains(brandName));
     }
 }
